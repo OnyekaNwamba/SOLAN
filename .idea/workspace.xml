@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7db919c3-1b7c-44f6-82b3-f80491c8e3bc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/weather-app.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/logo192.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/logo512.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/cityText.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/DateComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/date-component.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/Menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/current.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/menu.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Menu/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/Temperature.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/random-rectangle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/temperature.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/Vector.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/WindRain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/dividor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/rainImage.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/wind-image.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/wind-rain.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Components/main.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/fonts/product-sans.woff.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/assets/sunny_bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/logo.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Less File" />
+        <option value="SCSS File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1YD5LjDn75hVcc7BMHZBS5NA6li" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Components/WindRain" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="nodejs_interpreter_path" value="node" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Components/WindRain" />
+      <recent name="$PROJECT_DIR$/src/Components/Menu" />
+      <recent name="$PROJECT_DIR$/src/Components/Temperature" />
+      <recent name="$PROJECT_DIR$/src/Components/DateComponent" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/Components/WindRain" />
+      <recent name="$PROJECT_DIR$/src/Components/Menu" />
+      <recent name="$PROJECT_DIR$/src/Components/Temperature" />
+      <recent name="$PROJECT_DIR$/src" />
+      <recent name="$PROJECT_DIR$/src/Components/CityTitle" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="npm.npm start">
+    <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
+      <method v="2" />
+    </configuration>
+    <configuration name="npm start" type="js.build_tools.npm">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7db919c3-1b7c-44f6-82b3-f80491c8e3bc" name="Default Changelist" comment="" />
+      <created>1582464270181</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1582464270181</updated>
+      <workItem from="1582464271454" duration="22998000" />
+      <workItem from="1582542951728" duration="5257000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+  </component>
+</project>

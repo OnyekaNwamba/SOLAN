@@ -1,0 +1,35 @@
+@font-face {
+    font-family:'Product Sans';
+    src: url('product-sans.ttf');
+}
+
+.randomRectangle {
+    /* Rectangle 2 */
+    position: absolute;
+    width: 56px;
+    height: 10px;
+    left: 34px;
+    top: 455px;
+    background: #4E4E4E;
+}
+
+
+/* 25 °C */
+.temperatureText {
+    position: absolute;
+    width: 162px;
+    height: 10px;
+    left: 33px;
+    top: 470px;
+
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 70px;
+    line-height: 10px;
+    /* identical to box height, or 14% */
+    display: flex;
+    align-items: center;
+
+    color: #4E4E4E;
+}

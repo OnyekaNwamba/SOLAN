@@ -1,0 +1,20 @@
+@font-face {
+  font-family:'Product Sans';
+  src: url('product-sans.ttf');
+}
+/* Tuesday 21st */
+.date {
+  position: relative;
+  width: 150px;
+  height: 10px;
+  left: 30px;
+  top: -0.1px;
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 10px;
+  /* identical to box height, or 67% */
+
+  color: rgba(0, 0, 0, 0.7);
+}
