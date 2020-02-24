@@ -31,7 +31,7 @@ html, body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url('assets/sunny_bg.jpg');
+  background-image: url('assets/sunny_bg.png');
   width: 360px;
   height: 560px;
   text-align: center;
@@ -45,7 +45,7 @@ html, body {
 /*
 .App-header {
   background-color: #282c34;
-  background-image: url('/assets/sunny_bg.jpg');
+  background-image: url('/assets/sunny_bg.png');
   min-height: 100vh;
   display: flex;
   flex-direction: column;
