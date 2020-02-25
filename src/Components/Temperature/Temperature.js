@@ -6,7 +6,7 @@ class Temperature extends React.Component {
         return(
             <div>
                 <img className={'randomRectangle'} src={rectangle} />
-                <h1 className={'temperatureText'}>25 °C</h1>
+                <h1 className={'temperatureText'}>{this.props.temp}</h1>
             </div>
         );
     }
