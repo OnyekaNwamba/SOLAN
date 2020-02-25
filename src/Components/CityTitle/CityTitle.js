@@ -4,9 +4,9 @@ class CityTitle extends React.Component {
     render() {
         return(
             <div>
-                <p  className={'date'}>Friday 13th</p>
-                <p className={'time'} >13:00</p>
-                <p className={'cityText'}>{this.props.city}</p>
+                <p  className={'date'}>{this.props.city[2]}</p>
+                <p className={'time'} >{this.props.city[1]}</p>
+                <p className={'cityText'}>{this.props.city[0]}</p>
             </div>
         );
     }

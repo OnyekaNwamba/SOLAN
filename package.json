@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-geolocated": "^3.0.1",
     "react-scripts": "3.4.0"
   },
   "scripts": {
@@ -31,5 +32,4 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://samples.openweathermap.org/"
 }

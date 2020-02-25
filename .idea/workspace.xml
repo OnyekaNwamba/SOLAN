@@ -2,56 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db919c3-1b7c-44f6-82b3-f80491c8e3bc" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/weather-app.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo192.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/logo512.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/manifest.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/robots.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/cityText.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/CityTitle/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/DateComponent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/date-component.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/DateComponent/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/Menu.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/current.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/menu.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Menu/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/Temperature.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/random-rectangle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/Temperature/temperature.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/Vector.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/WindRain.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/dividor.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/rainImage.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/wind-image.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/WindRain/wind-rain.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/main.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/fonts/product-sans.woff.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/sunny_bg.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/product-sans.ttf" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/serviceWorker.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/setupTests.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/Temperature/Temperature.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Temperature/Temperature.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -157,7 +113,7 @@
       <option name="presentableId" value="Default" />
       <updated>1582464270181</updated>
       <workItem from="1582464271454" duration="22998000" />
-      <workItem from="1582542951728" duration="5257000" />
+      <workItem from="1582542951728" duration="20881000" />
     </task>
     <servers />
   </component>
