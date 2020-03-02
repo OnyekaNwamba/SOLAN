@@ -35,7 +35,7 @@
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
-  line-height: 10px;
+  text-align: left;
   /* identical to box height, or 33% */
 
   color: rgba(0, 0, 0, 0.7);
