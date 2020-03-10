@@ -7,6 +7,11 @@ import React, { useEffect, useState } from "react";
 /*
 import { render } from "@testing-library/react";
 import { ReactComponent } from "*.svg";*/
+import React, { useEffect, useState } from "react";
+
+import CityTitle from "../CityTitle/CityTitle";
+import Temperature from "../Temperature/Temperature";
+import WindRain from "../WindRain/WindRain";
 
 const days = [
   "Monday",
@@ -88,6 +93,14 @@ const Home = () => {
     }
 
     let fullDate = day + " " + dateStr;
+    let mins = d.getMinutes();
+    let time = hours + ":" + mins;
+
+    //Get date + day of week
+
+    let dayN = d.getDay();
+    let day = days[dayN - 1];
+    let fullDate = day + " " + dayN;
 
     return {
       city: json.name,
@@ -112,6 +125,8 @@ const Home = () => {
             long: coords.longitude
           }
         });
+        setLat(coords.latitude);
+        setLong(coords.longitude);
 
         fetchData(coords.latitude, coords.longitude).then(res => {
           setData(res);
@@ -129,4 +144,5 @@ const Home = () => {
     </>
   );
 };
+
 export default Home;
