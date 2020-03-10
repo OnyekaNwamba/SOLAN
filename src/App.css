@@ -38,7 +38,7 @@ body {
   padding-top: 40px;
   margin: 0 auto;
   margin-top: 40px;
-  overflow: scroll;
+  overflow: scroll; /*Remove later when*/
 }
 
 /*
