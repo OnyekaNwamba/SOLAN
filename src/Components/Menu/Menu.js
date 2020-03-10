@@ -1,17 +1,28 @@
-import React from "react";
+import React,{useState} from "react";
 import './menu.css';
-import current from './current.png';
-class Menu extends React.Component {
-    render() {
-        return(
-            <div className={"menu-bar"}>
-                <p className={'today'}>Today</p>
-                <img className={"current"} src={current} />
-                <p className={'schedule'}>Schedule</p>
-                <p className={'next-5-days'}> Next 5 days </p>
-            </div>
-        );
-    }
+
+const items = ["Today","Schedule","Next 5 days"];
+function MenuList(props)
+{
+    const listItems = props.items.map((item) =>
+        <li key={item}>{item}</li>
+    );
+    return (
+        <ul>{listItems}</ul>
+    );
 }
+const Menu = () => {
+	const [selected,setSelected] = useState(0);
+
+
+	return(
+            <div className={"menu-bar"}>
+                <MenuList items={items}/>
+                {/*{ items.map((item,index) =>  <p key={index} className={`${selected==index ? 'current':''}`} onClick={()=> {setSelected(index)}}> {item}</p> )}*/}
+
+</div>
+      
+        );
+};
 
 export default Menu;
