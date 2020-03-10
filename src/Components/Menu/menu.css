@@ -1,65 +1,39 @@
 @font-face {
-    font-family:'Product Sans';
-    src: url('product-sans.ttf');
+  font-family: "Product Sans";
+  src: url("product-sans.ttf");
 }
 
-.today {
-    /* Today */
-
-    position: relative;
-    width: 37px;
-    height: 15px;
-
-    font-family: Product Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 10px;
-    /* or 83% */
-    color: #FFFFFF;
-    z-index: 2;
+ul a {
+  text-decoration: none;
+  color: inherit;
 }
 
-.current {
-    /* Rectangle 11 */
-    position: absolute;
-    width: 74px;
-    height: 25px;
-
-    color: rgba(0, 0, 0, 0.7);
-    border-radius: 20px;
-    z-index: 1;
+ul a:hover {
+  text-decoration: none;
+}
+ul {
+  list-style-type: None;
+  display: flex;
+  align-content: flex-start;
+  padding: 0;
+  margin: 0;
 }
 
-.schedule {
-    /* Schedule */
-    position: relative;
-    width: 51px;
-    height: 15px;
-
-    font-family: Product Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-    /* identical to box height */
-
-    color: rgba(0, 0, 0, 0.7);
+li {
+  display: flex;
+  margin-left: 20pt;
 }
 
-.next-5-days {
-    /* Next 5 days */
-    position: relative;
-    width: 75px;
-    height: 15px;
+.selected {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 20px;
+  color: #ffffff;
+}
 
-    font-family: Product Sans;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 12px;
-    line-height: 15px;
-    /* identical to box height */
-    color: rgba(0, 0, 0, 0.7);
+.menu-bar {
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: bold;
 }
 
 ul{
