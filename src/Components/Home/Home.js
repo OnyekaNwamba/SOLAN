@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-import CityTitle from "./CityTitle/CityTitle";
-import Temperature from "./Temperature/Temperature";
-import WindRain from "./WindRain/WindRain";
+import CityTitle from "../CityTitle/CityTitle";
+import Temperature from "../Temperature/Temperature";
+import WindRain from "../WindRain/WindRain";
 
 const days = [
   "Monday",
