@@ -1,15 +1,12 @@
 //import CityTitle from './Components/CityTitle/CityTitle'
 import "./App.css";
 
-import { Link, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
-import CityTitle from "./Components/CityTitle/CityTitle";
-import Home from "./Components/Home";
+import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
 import React from "react";
-import Temperature from "./Components/Temperature/Temperature";
-import WindRain from "./Components/WindRain/WindRain";
-import logo from "./logo.svg";
+import Schedule from "./Components/Schedule/Schedule";
 
 const API_KEY = "3585775f387b0d0cba6c5b3dc41b8167";
 
@@ -83,7 +80,7 @@ export default class App extends React.Component {
           <Menu />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/schedule" element={<div>hello</div>} />
+            <Route path="/schedule" element={<Schedule />} />
           </Routes>
         </div>
       </div>
