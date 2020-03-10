@@ -1,28 +1,50 @@
-import React,{useState} from "react";
-import './menu.css';
+import "./menu.css";
 
-const items = ["Today","Schedule","Next 5 days"];
-function MenuList(props)
-{
-    const listItems = props.items.map((item) =>
-        <li key={item}>{item}</li>
-    );
-    return (
-        <ul>{listItems}</ul>
-    );
-}
+import React, { useState } from "react";
+
+import { Link } from "react-router-dom";
+
+const items = [
+  {
+    text: "Today",
+    path: "/"
+  },
+  {
+    text: "Schedule",
+    path: "/schedule"
+  },
+  {
+    text: "Next 5 days",
+    path: "/next"
+  }
+];
+
 const Menu = () => {
-	const [selected,setSelected] = useState(0);
+  const [selected, setSelected] = useState(0);
 
+  const handleClick = index => {
+    setSelected(index);
+  };
 
-	return(
-            <div className={"menu-bar"}>
-                <MenuList items={items}/>
-                {/*{ items.map((item,index) =>  <p key={index} className={`${selected==index ? 'current':''}`} onClick={()=> {setSelected(index)}}> {item}</p> )}*/}
+  const listItems = items.map((item, index) => (
+    <Link to={item.path}>
+      <li
+        key={item}
+        onClick={() => {
+          handleClick(index);
+        }}
+        className={`${selected === index ? "selected pa-1" : "pa-1"}`}
+      >
+        {item.text}
+      </li>
+    </Link>
+  ));
 
-</div>
-      
-        );
+  return (
+    <div className={"menu-bar"}>
+      <ul>{listItems}</ul>
+    </div>
+  );
 };
 
 export default Menu;
