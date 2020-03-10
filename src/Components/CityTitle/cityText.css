@@ -1,64 +1,47 @@
 @font-face {
-  font-family:'Product Sans';
-  src: url('product-sans.ttf');
+  font-family: "Product Sans";
+  src: url("product-sans.ttf");
 }
 
 /* Friday 13th */
 .date {
   /* Tuesday 21st */
-  position: absolute;
+
   width: 92px;
   height: 10px;
-  left: 30px;
-  top: 143px;
 
   font-family: Product Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
-  line-height: 10px;
+  text-align: left;
   /* identical to box height, or 67% */
   color: rgba(0, 0, 0, 0.7);
-
 }
 
-/* London */
 .cityText {
-  /* London */
-  position: absolute;
   width: 103px;
   height: 10px;
-  left: 38px;
-  top: 160px;
-
   font-family: Product Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 30px;
   text-align: left;
   /* identical to box height, or 33% */
-
   color: rgba(0, 0, 0, 0.7);
-
 }
 
 .time {
-  /* 13:00 */
-  position: absolute;
   width: 44px;
   height: 11px;
-  left: 136px;
-  top: 142px;
 
   font-family: Product Sans;
   font-style: normal;
   font-weight: bold;
   font-size: 15px;
   line-height: 10px;
-  /* or 67% */
   display: flex;
   align-items: center;
 
-  color: #4E4E4E;
-
+  color: #4e4e4e;
 }

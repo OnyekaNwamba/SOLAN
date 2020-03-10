@@ -1,15 +1,22 @@
+import "./cityText.css";
+
 import React from "react";
-import './cityText.css';
-class CityTitle extends React.Component {
-    render() {
-        return(
-            <div>
-                <p  className={'date'}>{this.props.city[2]}</p>
-                <p className={'time'} >{this.props.city[1]}</p>
-                <p className={'cityText'}>{this.props.city[0]}</p>
-            </div>
-        );
-    }
-}
+
+const CityTitle = ({ date, city, time }) => {
+  return (
+    <div>
+      <div>
+        <p className="ma0 pa0">{date}</p>
+        <p className="ma0 pa0">{time}</p>
+      </div>
+      <p>{city}</p>
+    </div>
+  );
+};
+// class CityTitle extends React.Component {
+//   render() {
+
+//   }
+// }
 
 export default CityTitle;
