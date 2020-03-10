@@ -1,0 +1,13 @@
+.header {
+  display: flex;
+  flex-basis: auto;
+  flex-grow: 1;
+  flex-shrink: 1;
+  text-align: left;
+  flex-direction: row;
+}
+
+.header p {
+  margin: 0;
+  padding: 0;
+}
