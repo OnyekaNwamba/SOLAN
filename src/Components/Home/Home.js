@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import CityTitle from "../CityTitle/CityTitle";
 import Temperature from "../Temperature/Temperature";
 import WindRain from "../WindRain/WindRain";
+import { useStore } from "../../stores/root";
 
 const days = [
   "Monday",
@@ -15,6 +16,7 @@ const days = [
 ];
 
 const Home = () => {
+  const { dispatch } = useStore();
   const [data, setData] = useState({
     city: "Loading..",
     windSpeed: 0,
@@ -22,9 +24,6 @@ const Home = () => {
     date: " ",
     time: " "
   });
-
-  const [lat, setLat] = useState(0.0);
-  const [long, setLong] = useState(0.0);
 
   const fetchData = async (lat, long) => {
     const response = await fetch(
@@ -35,6 +34,13 @@ const Home = () => {
         "&appid=b6907d289e10d714a6e88b30761fae22"
     );
     const json = await response.json();
+
+    console.log(json);
+
+    dispatch({
+      type: "SET_COUNTRY",
+      payload: { country: json.sys.country, city: json.name }
+    });
 
     // GET TIME
     let d = new Date();
@@ -63,15 +69,20 @@ const Home = () => {
       navigator.geolocation.getCurrentPosition(pos => {
         const coords = pos.coords;
 
-        setLat(coords.latitude);
-        setLong(coords.longitude);
+        dispatch({
+          type: "SET_COORDS",
+          payload: {
+            lat: coords.latitude,
+            long: coords.longitude
+          }
+        });
 
         fetchData(coords.latitude, coords.longitude).then(res => {
           setData(res);
         });
       });
     }
-  });
+  }, [dispatch]);
 
   return (
     <>

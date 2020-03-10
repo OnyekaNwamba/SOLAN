@@ -7,6 +7,7 @@ import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
 import React from "react";
 import Schedule from "./Components/Schedule/Schedule";
+import { StoreProvider } from "./stores/root";
 
 const API_KEY = "3585775f387b0d0cba6c5b3dc41b8167";
 
@@ -15,11 +16,13 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <div className={"container"}>
-          <Menu />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/schedule" element={<Schedule />} />
-          </Routes>
+          <StoreProvider>
+            <Menu />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/schedule" element={<Schedule />} />
+            </Routes>
+          </StoreProvider>
         </div>
       </div>
     );
