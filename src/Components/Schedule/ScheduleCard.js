@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Card from "../Card/Card";
+import { useStore } from "../../stores/root";
 
 const ScheduleCard = ({
   location,
@@ -16,6 +17,8 @@ const ScheduleCard = ({
   const handleExpanded = () => {
     setExpanded(!expanded);
   };
+
+  //api.openweathermap.org/data/2.5/forecast/?q=Shepherds Bush&appid=ae274f9fa95742d9eb8ba702e2259052
 
   return (
     <Card className="ma-3">
