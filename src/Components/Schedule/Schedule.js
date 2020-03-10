@@ -2,6 +2,7 @@ import "./Schedule.css";
 
 import Card from "../Card/Card";
 import React from "react";
+import ScheduleCard from "./ScheduleCard";
 
 const scheduleData = [
   {
@@ -39,30 +40,15 @@ const Schedule = () => {
     <>
       {scheduleData.map(schedule => {
         return (
-          <Card className="ma-3">
-            <div className="header">
-              <div>
-                <h3>
-                  {schedule.time} {schedule.temp}
-                </h3>
-
-                <img
-                  src={require(`../../assets/${schedule.img}`)}
-                  alt={schedule.img}
-                />
-
-                <p>{schedule.weather}</p>
-              </div>
-              <div className="ml-2">
-                <h3>
-                  {schedule.location},{schedule.country}
-                </h3>
-                {schedule.description}
-              </div>
-
-              {/* <p> */}
-            </div>
-          </Card>
+          <ScheduleCard
+            location={schedule.location}
+            country={schedule.country}
+            time={schedule.time}
+            img={schedule.img}
+            temp={schedule.temp}
+            weather={schedule.weather}
+            description={schedule.description}
+          />
         );
       })}
     </>
