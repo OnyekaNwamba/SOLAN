@@ -96,11 +96,31 @@ const Home = () => {
     let mins = d.getMinutes();
     let time = hours + ":" + mins;
 
-    //Get date + day of week
-
+    //Get day
     let dayN = d.getDay();
     let day = days[dayN - 1];
-    let fullDate = day + " " + dayN;
+
+    //Get ordinal date
+    //let date = d.getDate() + "/" + (d.getMonth() < 10 ? '0' : '') + d.getMonth();
+    let date = d.getDate();
+    let dateStr = date.toString();
+
+    if (date >= 11 && date <= 13) {
+      dateStr += "th";
+    } else {
+      switch (date % 10) {
+        case 1:
+          dateStr += "st";
+        case 2:
+          dateStr += "nd";
+        case 3:
+          dateStr += "rd";
+        default:
+          dateStr += "th";
+      }
+    }
+
+    let fullDate = day + " " + dateStr;
 
     return {
       city: json.name,
