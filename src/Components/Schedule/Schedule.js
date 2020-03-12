@@ -1,4 +1,5 @@
 import "./Schedule.css";
+import { differenceInHours, format } from "date-fns";
 
 import React, { useEffect, useState } from "react";
 
@@ -6,7 +7,92 @@ import Card from "../Card/Card";
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
 
-const API_KEY = "ae274f9fa95742d9eb8ba702e2259052";
+const API_KEY = "PASTE_YOUR_API_KEY";
+const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
+
+const foo = [
+  {
+    dt: 1584014400,
+    main: {
+      temp: 281.78,
+      feels_like: 273.46,
+      temp_min: 281.3,
+      temp_max: 281.78,
+      pressure: 1010,
+      sea_level: 1010,
+      grnd_level: 1007,
+      humidity: 46,
+      temp_kf: 0.48
+    },
+    weather: [
+      { id: 500, main: "Rain", description: "light rain", icon: "10d" }
+    ],
+    clouds: { all: 61 },
+    wind: { speed: 8.59, deg: 250 },
+    rain: { "3h": 0.5 },
+    sys: { pod: "d" },
+    dt_txt: "2020-03-12 12:00:00"
+  }
+];
+
+const getActivityType = code => {
+  let type;
+  if (code < 300 && code >= 200) {
+    type = "Thunderstorm";
+  } else if (code < 400 && code >= 300) {
+    type = "Drizzle";
+  } else if (code < 600 && code >= 500) {
+    type = "Rain";
+  } else if (code < 700 && code >= 600) {
+    type = "Snow";
+  } else if (code < 800 && code >= 700) {
+    type = "Atmosphere";
+  } else if (code === 800) {
+    type = "Clear";
+  } else if (code < 900 && code > 800) {
+    type = "Clouds";
+  } else {
+    throw new Error("Unknown weather type");
+  }
+};
+
+const ACTIVITIES_TYPES = {
+  Thunderstorm: [""],
+  Drizzle: ["movie_theater", "casino"],
+  Rain: [],
+  Snow: [""],
+  Atmosphere: [""],
+  Clear: ["tourist_attraction"],
+  Clouds: ["tourist_attraction"]
+};
+
+const getActivityForType = type => {};
+
+const getActivity = async type => {
+  const resp = await fetch(
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${""}&inputtype=textquery`
+  );
+
+  const json = await resp.json();
+};
+const getSchedule = async weather => {
+  const currentDate = new Date();
+  const date = new Date(weather.dt_txt);
+
+  let dateString;
+
+  const diff = differenceInHours(currentDate, date);
+
+  if (diff < 2) {
+    dateString = "Now";
+  } else {
+    dateString = format(date, "p");
+  }
+
+  const activityType = getActivityType(weather.weather[0].id);
+
+  console.log(dateString);
+};
 
 const scheduleData = [
   {
@@ -59,14 +145,13 @@ const Schedule = () => {
     if (state.lat && state.long) {
       fetchData(state.city, state.country);
     } else {
+      getSchedule(foo[0]);
     }
-  });
+  }, []);
 
   return (
     <>
       {forecasts.length > 0 ? (
-        <p>Loading</p>
-      ) : (
         scheduleData.map(schedule => {
           return (
             <ScheduleCard
@@ -80,6 +165,8 @@ const Schedule = () => {
             />
           );
         })
+      ) : (
+        <p>Loading</p>
       )}
     </>
   );
