@@ -41,7 +41,7 @@ const Menu = () => {
       }}
     >
       <li
-        key={item}
+        key={`${item.text}-${item.path}`}
         onClick={() => {
           handleClick(index);
         }}
