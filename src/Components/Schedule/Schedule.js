@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 import Card from "../Card/Card";
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
+import { wait } from "@testing-library/react";
 
 const API_KEY = "PASTE_YOUR_API_KEY";
 const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
@@ -35,7 +36,7 @@ const foo = [
   }
 ];
 
-const getActivityType = code => {
+const getActivityInformation = async code => {
   let type;
   if (code < 300 && code >= 200) {
     type = "Thunderstorm";
@@ -54,27 +55,54 @@ const getActivityType = code => {
   } else {
     throw new Error("Unknown weather type");
   }
+
+  const choice = Math.floor(
+    Math.random(0, ACTIVITIES_TYPES[type].length) *
+      ACTIVITIES_TYPES[type].length
+  );
+
+  console.log(ACTIVITIES_TYPES[type]);
+
+  console.log(choice);
+
+  console.log(
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&key=${GOOGLE_API_KEY}`
+  );
+  const resp = await fetch(
+    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery`,
+    {
+      mode: "cors",
+      headers: {
+        "Access-Control-Allow-Origin": "https://maps.googleapis.com"
+      }
+    }
+  );
+
+  const json = await resp.json();
+
+  const place = json.candidates[0];
+
+  const resp2 = await fetch(
+    `https://maps.googleapis.com/maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
+  );
+
+  console.log(json);
+
+  console.log(await resp2.json());
+
+  return;
 };
 
 const ACTIVITIES_TYPES = {
   Thunderstorm: [""],
-  Drizzle: ["movie_theater", "casino"],
-  Rain: [],
-  Snow: [""],
-  Atmosphere: [""],
-  Clear: ["tourist_attraction"],
-  Clouds: ["tourist_attraction"]
+  Drizzle: ["theater", "casino"],
+  Rain: ["museum", "restaurant", "movies", "spa"],
+  Snow: ["shopping mall", "cinema"],
+  Atmosphere: ["shopping mall"],
+  Clear: ["tourist attractions", "go karting", "theater"],
+  Clouds: ["tourist attractions", "go karting", "restaurant", "theater"]
 };
 
-const getActivityForType = type => {};
-
-const getActivity = async type => {
-  const resp = await fetch(
-    `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${""}&inputtype=textquery`
-  );
-
-  const json = await resp.json();
-};
 const getSchedule = async weather => {
   const currentDate = new Date();
   const date = new Date(weather.dt_txt);
@@ -89,7 +117,11 @@ const getSchedule = async weather => {
     dateString = format(date, "p");
   }
 
-  const activityType = getActivityType(weather.weather[0].id);
+  const activityInformation = await getActivityInformation(
+    weather.weather[0].id
+  );
+
+  console.log(activityInformation);
 
   console.log(dateString);
 };
