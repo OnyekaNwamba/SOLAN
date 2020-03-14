@@ -106,12 +106,16 @@ const Home = () => {
       switch (date % 10) {
         case 1:
           dateStr += "st";
+          break;
         case 2:
           dateStr += "nd";
+          break;
         case 3:
           dateStr += "rd";
+          break;
         default:
           dateStr += "th";
+          break;
       }
     }
 
