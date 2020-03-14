@@ -6,13 +6,13 @@ const CityTitle = ({ date, city, time }) => {
   return (
     <div>
       <div>
-        <p className="ma0 pa0">{date}</p>
-        <p className="ma0 pa0">{time}</p>
+        <p className="dateTime">{date}<p className="timeSpacing">{time}</p></p>
       </div>
-      <p>{city}</p>
+      <p className="cityText">{city}</p>
     </div>
   );
 };
+
 // class CityTitle extends React.Component {
 //   render() {
 

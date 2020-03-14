@@ -1,8 +1,12 @@
-import React, { useEffect, useState } from "react";
-
 import CityTitle from "../CityTitle/CityTitle";
 import Temperature from "../Temperature/Temperature";
 import WindRain from "../WindRain/WindRain";
+import Weather from "../Weather/Weather";
+import { useStore } from "../../stores/root";
+import React, { useEffect, useState } from "react";
+/*
+import { render } from "@testing-library/react";
+import { ReactComponent } from "*.svg";*/
 
 const days = [
   "Monday",
@@ -15,12 +19,14 @@ const days = [
 ];
 
 const Home = () => {
+  const { state, dispatch } = useStore();
   const [data, setData] = useState({
     city: "Loading..",
     windSpeed: 0,
     temp: " ",
     date: " ",
-    time: " "
+    time: " ",
+    weather:" ",
   });
 
   const [lat, setLat] = useState(0.0);
@@ -35,6 +41,17 @@ const Home = () => {
         "&appid=b6907d289e10d714a6e88b30761fae22"
     );
     const json = await response.json();
+    console.log(json);
+
+    dispatch({
+      type: "SET_COUNTRY",
+      payload: { country: json.sys.country, city: json.name }
+    });
+
+    dispatch({
+      type: "SET_WEATHER",
+      payload: {weather: json.weather[0].main}
+    });
 
     // GET TIME
     let d = new Date();
@@ -67,40 +84,49 @@ const Home = () => {
       }
     }
 
-    let fullDate = day + " " + dateStr;
+    let fullDate = day + " " + dateStr;    
 
     return {
       city: json.name,
       temp: Math.floor(json.main.temp),
       windSpeed: json.wind.speed,
       time,
-      date: fullDate
+      date: fullDate,
+      weather: json.weather[0].main,
     };
   };
   fetchData();
+
 
   useEffect(() => {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         const coords = pos.coords;
 
-        setLat(coords.latitude);
-        setLong(coords.longitude);
+        dispatch({
+          type: "SET_COORDS",
+          payload: {
+            lat: coords.latitude,
+            long: coords.longitude
+          }
+        });
 
         fetchData(coords.latitude, coords.longitude).then(res => {
           setData(res);
         });
       });
     }
-  });
+  }, [dispatch]);
+  
 
   return (
     <>
       <CityTitle date={data.date} time={data.time} city={data.city} />
       <Temperature temp={data.temp + "°C"} />
       <WindRain speed={data.windSpeed} />
+      <Weather weather={data.weather} />
     </>
   );
-};
 
-export default Home;
+};
+export default Home; 
