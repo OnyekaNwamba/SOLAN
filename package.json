@@ -21,6 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "https://maps.googleapis.com",
   "eslintConfig": {
     "extends": "react-app"
   },
