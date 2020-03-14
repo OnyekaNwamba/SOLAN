@@ -21,7 +21,6 @@ const reducer = (state = defaultState, action = {}) => {
         city: action.payload.city
       };
     case "SET_WEATHER":
-      console.log(action.payload.weather);
       return {
         ...state,
         weather: action.payload.weather
