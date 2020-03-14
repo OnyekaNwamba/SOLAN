@@ -1,14 +1,14 @@
-import React, { createContext, useContext, useReducer } from "react";
-import App from '../App.js';
+import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
 
 const defaultState = {
     lat: null,
     long: null,
     country: " ",
     city:" ",
-    weather: "Clouds",
+    weather:"Clouds",
 };
 
+const StoreContext = createContext(null);
 
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
@@ -40,5 +40,3 @@ export const StoreProvider = ({ children }) => {
 };
 
 export const useStore = () => useContext(StoreContext);
-
-const StoreContext = createContext(null);
