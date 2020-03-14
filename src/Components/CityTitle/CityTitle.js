@@ -16,10 +16,4 @@ const CityTitle = ({ date, city, time }) => {
   );
 };
 
-// class CityTitle extends React.Component {
-//   render() {
-
-//   }
-// }
-
 export default CityTitle;

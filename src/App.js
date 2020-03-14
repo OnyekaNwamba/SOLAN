@@ -6,7 +6,6 @@ import DrizzleImage from "./assets/drizzle_bg.png";
 import SnowImage from "./assets/snow_bg.png";
 import ThunderstormImage from "./assets/thunder_bg.png";
 import SunnyImage from "./assets/sunny_bg.png";
-
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
