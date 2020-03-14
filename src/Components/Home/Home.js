@@ -4,12 +4,6 @@ import WindRain from "../WindRain/WindRain";
 import Weather from "../Weather/Weather";
 import { useStore } from "../../stores/root";
 import React, { useEffect, useState } from "react";
-import React, { useEffect, useState } from "react";
-
-import CityTitle from "../CityTitle/CityTitle";
-import Temperature from "../Temperature/Temperature";
-import WindRain from "../WindRain/WindRain";
-
 
 const days = [
   "Monday",
@@ -62,7 +56,6 @@ const Home = () => {
         weather: json.weather[0].main
       }
     });
-
 
     // GET TIME
     let d = new Date();
@@ -130,9 +123,7 @@ const Home = () => {
         });
       });
     }
-
   }, [dispatch]);
-
 
   return (
     <>

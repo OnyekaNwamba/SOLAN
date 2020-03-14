@@ -17,6 +17,8 @@ const ScheduleCard = ({
     setExpanded(!expanded);
   };
 
+  console.log(`~/assets/${img}`);
+
   return (
     <Card className="ma-3">
       <div className="header">
@@ -25,7 +27,7 @@ const ScheduleCard = ({
             {time} {temp}
           </h3>
 
-          <img src={require(`../../assets/${img}`)} alt={img} />
+          <img src={require(`../../assets/sunny.svg`)} alt={img} />
 
           <p>{weather}</p>
         </div>

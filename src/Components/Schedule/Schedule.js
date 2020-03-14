@@ -1,6 +1,5 @@
 import "./Schedule.css";
 
-import Card from "../Card/Card";
 import React from "react";
 import ScheduleCard from "./ScheduleCard";
 
