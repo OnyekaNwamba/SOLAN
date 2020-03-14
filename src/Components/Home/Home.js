@@ -26,7 +26,7 @@ const Home = () => {
     temp: " ",
     date: " ",
     time: " ",
-    weather:" ",
+    weather: " "
   });
 
   const [lat, setLat] = useState(0.0);
@@ -50,41 +50,44 @@ const Home = () => {
 
     dispatch({
       type: "SET_WEATHER",
-      payload: {weather: json.weather[0].main}
+      payload: { weather: json.weather[0].main }
     });
 
     // GET TIME
     let d = new Date();
     let hours = d.getHours();
-    let mins = (d.getMinutes() < 10 ? '0' : '') + d.getMinutes();
+    let mins = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
     let time = hours + ":" + mins;
 
     //Get day
     let dayN = d.getDay();
     let day = days[dayN - 1];
-    
-    //Get ordinal date  
+
+    //Get ordinal date
     //let date = d.getDate() + "/" + (d.getMonth() < 10 ? '0' : '') + d.getMonth();
     let date = d.getDate();
     let dateStr = date.toString();
 
-    if (date >= 11 && date<=13) {
+    if (date >= 11 && date <= 13) {
       dateStr += "th";
-    }
-    else{
-      switch(date%10){
+    } else {
+      switch (date % 10) {
         case 1:
           dateStr += "st";
+          break;
         case 2:
           dateStr += "nd";
+          break;
         case 3:
           dateStr += "rd";
+          break;
         default:
           dateStr += "th";
+          break;
       }
     }
 
-    let fullDate = day + " " + dateStr;    
+    let fullDate = day + " " + dateStr;
 
     return {
       city: json.name,
@@ -92,11 +95,10 @@ const Home = () => {
       windSpeed: json.wind.speed,
       time,
       date: fullDate,
-      weather: json.weather[0].main,
+      weather: json.weather[0].main
     };
   };
   fetchData();
-
 
   useEffect(() => {
     if (navigator && navigator.geolocation) {
@@ -117,7 +119,6 @@ const Home = () => {
       });
     }
   }, [dispatch]);
-  
 
   return (
     <>
@@ -127,6 +128,5 @@ const Home = () => {
       <Weather weather={data.weather} />
     </>
   );
-
 };
-export default Home; 
+export default Home;

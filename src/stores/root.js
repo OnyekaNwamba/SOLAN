@@ -1,11 +1,11 @@
-import React, { createContext, useContext, useReducer, useEffect, useState } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 
 const defaultState = {
-    lat: null,
-    long: null,
-    country: " ",
-    city:" ",
-    weather:"Clouds",
+  lat: null,
+  long: null,
+  country: " ",
+  city: " ",
+  weather: "Snow"
 };
 
 const StoreContext = createContext(null);
@@ -13,18 +13,19 @@ const StoreContext = createContext(null);
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case "SET_COORDS":
-      return { ...state,lat: action.payload.lat, long: action.payload.long };
+      return { ...state, lat: action.payload.lat, long: action.payload.long };
     case "SET_COUNTRY":
       return {
         ...state,
         country: action.payload.country,
         city: action.payload.city
-      }
+      };
     case "SET_WEATHER":
-        return {
-            ...state,
-            weather: action.payload.weather 
-        };
+      console.log(action.payload.weather);
+      return {
+        ...state,
+        weather: action.payload.weather
+      };
     default:
       throw new Error(`Unknown action type ${action.type}`);
   }
