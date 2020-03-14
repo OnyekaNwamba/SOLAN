@@ -10,9 +10,7 @@ import SunnyImage from "./assets/sunny_bg.png";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
-import Weather from "./Components/Weather/Weather";
-import React, { useState, useStore, useContext } from "react";
-import { StoreProvider } from "./stores/root";
+import React, { useContext, useEffect } from "react";
 import Schedule from "./Components/Schedule/Schedule";
 import { useStore } from "./stores/root";
 
