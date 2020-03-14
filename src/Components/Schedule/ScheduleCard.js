@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 import Card from "../Card/Card";
-import { useStore } from "../../stores/root";
 
 const ScheduleCard = ({
   location,

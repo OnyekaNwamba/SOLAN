@@ -1,10 +1,9 @@
 import "./Schedule.css";
 import { differenceInHours, format } from "date-fns";
 import React, { useEffect, useState } from "react";
-import Card from "../Card/Card";
+
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
-import { wait } from "@testing-library/react";
 
 const API_KEY = "PASTE_YOUR_API_KEY";
 const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
@@ -166,7 +165,7 @@ const Schedule = () => {
     );
     const json = await response.json();
 
-    setForecasts(json.list.slice(0, 8));
+    setForecasts([""]);
     console.log(json);
   };
 
