@@ -4,8 +4,11 @@ const defaultState = {
   lat: null,
   long: null,
   country: " ",
-  city: " "
+  city: " ",
+  weather: "Snow"
 };
+
+const StoreContext = createContext(null);
 
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
@@ -16,6 +19,11 @@ const reducer = (state = defaultState, action = {}) => {
         ...state,
         country: action.payload.country,
         city: action.payload.city
+      };
+    case "SET_WEATHER":
+      return {
+        ...state,
+        weather: action.payload.weather
       };
     default:
       throw new Error(`Unknown action type ${action.type}`);
@@ -32,5 +40,3 @@ export const StoreProvider = ({ children }) => {
 };
 
 export const useStore = () => useContext(StoreContext);
-
-const StoreContext = createContext(null);

@@ -1,8 +1,6 @@
 import "./Schedule.css";
 import { differenceInHours, format } from "date-fns";
-
 import React, { useEffect, useState } from "react";
-
 import Card from "../Card/Card";
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
-
 import CityTitle from "../CityTitle/CityTitle";
 import Temperature from "../Temperature/Temperature";
 import WindRain from "../WindRain/WindRain";
+import Weather from "../Weather/Weather";
 import { useStore } from "../../stores/root";
+import React, { useEffect, useState } from "react";
+
 
 const days = [
   "Monday",
@@ -22,7 +23,9 @@ const Home = () => {
     windSpeed: 0,
     temp: " ",
     date: " ",
-    time: " "
+
+    time: " ",
+    weather: " "
   });
 
   const fetchData = async (lat, long) => {
@@ -34,6 +37,22 @@ const Home = () => {
         "&appid=b6907d289e10d714a6e88b30761fae22"
     );
     const json = await response.json();
+    console.log(json);
+
+    dispatch({
+      type: "SET_COUNTRY",
+      payload: {
+        country: json.sys.country,
+        city: json.name
+      }
+    });
+
+    dispatch({
+      type: "SET_WEATHER",
+      payload: {
+        weather: json.weather[0].main
+      }
+    });
 
     console.log(json);
 
@@ -45,21 +64,45 @@ const Home = () => {
     // GET TIME
     let d = new Date();
     let hours = d.getHours();
-    let mins = d.getMinutes();
+    let mins = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
+
     let time = hours + ":" + mins;
 
-    //Get date + day of week
-
+    //Get day
     let dayN = d.getDay();
     let day = days[dayN - 1];
-    let fullDate = day + " " + dayN;
+    //let date = d.getDate() + "/" + (d.getMonth() < 10 ? '0' : '') + d.getMonth();
+    let date = d.getDate();
+    let dateStr = date.toString();
+
+    if (date >= 11 && date <= 13) {
+      dateStr += "th";
+    } else {
+      switch (date % 10) {
+        case 1:
+          dateStr += "st";
+          break;
+        case 2:
+          dateStr += "nd";
+          break;
+        case 3:
+          dateStr += "rd";
+          break;
+        default:
+          dateStr += "th";
+          break;
+      }
+    }
+
+    let fullDate = day + " " + dateStr;
 
     return {
       city: json.name,
       temp: Math.floor(json.main.temp),
       windSpeed: json.wind.speed,
       time,
-      date: fullDate
+      date: fullDate,
+      weather: json.weather[0].main
     };
   };
   fetchData();
@@ -68,6 +111,13 @@ const Home = () => {
     if (navigator && navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(pos => {
         const coords = pos.coords;
+        dispatch({
+          type: "SET_COORDS",
+          payload: {
+            lat: coords.latitude,
+            long: coords.longitude
+          }
+        });
 
         dispatch({
           type: "SET_COORDS",
@@ -89,6 +139,7 @@ const Home = () => {
       <CityTitle date={data.date} time={data.time} city={data.city} />
       <Temperature temp={data.temp + "°C"} />
       <WindRain speed={data.windSpeed} />
+      <Weather weather={data.weather} />
     </>
   );
 };

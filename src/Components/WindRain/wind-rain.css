@@ -59,7 +59,8 @@
     right: 27.78%;
     top: 532px;
     bottom: 16.36%;
-    background: #2196F3;
+    background:none;
+    /*background: #2196F3;*/
 }
 
 .dividor {

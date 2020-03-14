@@ -18,8 +18,6 @@ const ScheduleCard = ({
     setExpanded(!expanded);
   };
 
-  //api.openweathermap.org/data/2.5/forecast/?q=Shepherds Bush&appid=ae274f9fa95742d9eb8ba702e2259052
-
   return (
     <Card className="ma-3">
       <div className="header">
@@ -28,7 +26,7 @@ const ScheduleCard = ({
             {time} {temp}
           </h3>
 
-          <img src={require(`../../assets/${img}`)} alt={img} />
+          <img src={require(`../../assets/sunny.svg`)} alt={img} />
 
           <p>{weather}</p>
         </div>
