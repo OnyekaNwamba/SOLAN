@@ -7,11 +7,6 @@ import React, { useEffect, useState } from "react";
 /*
 import { render } from "@testing-library/react";
 import { ReactComponent } from "*.svg";*/
-import React, { useEffect, useState } from "react";
-
-import CityTitle from "../CityTitle/CityTitle";
-import Temperature from "../Temperature/Temperature";
-import WindRain from "../WindRain/WindRain";
 
 const days = [
   "Monday",
@@ -164,5 +159,4 @@ const Home = () => {
     </>
   );
 };
-
 export default Home;

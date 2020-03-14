@@ -39,4 +39,5 @@ export const StoreProvider = ({ children }) => {
   );
 };
 
+const StoreContext = createContext(null);
 export const useStore = () => useContext(StoreContext);

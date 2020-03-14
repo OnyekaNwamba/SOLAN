@@ -54,6 +54,38 @@
 
   font-family: Product Sans;
   font-style: normal;
+  height: 103px;
+  left: 30px;
+  top: 110px;
+
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12pt;
+  text-align: left;
+  /* identical to box height, or 67% */
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.timeSpacing {
+  word-wrap: none;
+  white-space: nowrap;
+  padding-left: 1em;
+  text-align: inherit;
+  font-display: inherit;
+  display: inline;
+  position: relative;
+}
+
+.cityText {
+  position: absolute;
+  width: 103px;
+  height: 103px;
+  left: 30px;
+  top: 120px;
+
+  font-family: Product Sans;
+  font-style: normal;
   font-weight: bolder;
   font-size: 30px;
   text-align: left;

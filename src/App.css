@@ -31,7 +31,6 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url("assets/sunny_bg.png");
   width: 360px;
   height: 560px;
   text-align: center;
