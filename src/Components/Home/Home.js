@@ -19,7 +19,7 @@ const days = [
 ];
 
 const Home = () => {
-  const { state, dispatch } = useStore();
+  const { dispatch } = useStore();
   const [data, setData] = useState({
     city: "Loading..",
     windSpeed: 0,
@@ -45,50 +45,23 @@ const Home = () => {
 
     dispatch({
       type: "SET_COUNTRY",
-      payload: { country: json.sys.country, city: json.name }
+      payload: {
+        country: json.sys.country,
+        city: json.name
+      }
     });
 
     dispatch({
       type: "SET_WEATHER",
-      payload: { weather: json.weather[0].main }
+      payload: {
+        weather: json.weather[0].main
+      }
     });
 
     // GET TIME
     let d = new Date();
     let hours = d.getHours();
     let mins = (d.getMinutes() < 10 ? "0" : "") + d.getMinutes();
-    let time = hours + ":" + mins;
-
-    //Get day
-    let dayN = d.getDay();
-    let day = days[dayN - 1];
-
-    //Get ordinal date
-    //let date = d.getDate() + "/" + (d.getMonth() < 10 ? '0' : '') + d.getMonth();
-    let date = d.getDate();
-    let dateStr = date.toString();
-
-    if (date >= 11 && date <= 13) {
-      dateStr += "th";
-    } else {
-      switch (date % 10) {
-        case 1:
-          dateStr += "st";
-          break;
-        case 2:
-          dateStr += "nd";
-          break;
-        case 3:
-          dateStr += "rd";
-          break;
-        default:
-          dateStr += "th";
-          break;
-      }
-    }
-
-    let fullDate = day + " " + dateStr;
-    let mins = d.getMinutes();
     let time = hours + ":" + mins;
 
     //Get day
