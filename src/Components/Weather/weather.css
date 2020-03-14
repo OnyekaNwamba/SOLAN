@@ -1,0 +1,18 @@
+.weatherCondition{
+    position: absolute;
+    width: 162px;
+    height: 10px;
+    left: 32px;
+    top: 525px;
+
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 25px;
+    line-height: 10px;
+    /* identical to box height, or 14% */
+    display: flex;
+    align-items: center;
+
+    color: #4E4E4E;
+}
