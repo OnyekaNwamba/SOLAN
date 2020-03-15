@@ -6,8 +6,8 @@ import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
 import { fetchWeatherData, fetchCoordinates } from "../../utils";
 
-const API_KEY = "4cf005fc4c6aec74d7c2332416ca2f39";
-const GOOGLE_API_KEY = "AIzaSyDSyuhJ8PxpOEPUeyAa1sXk9ECaBJlmkEg";
+const API_KEY = "";
+const GOOGLE_API_KEY = "";
 
 const DESCRIPTION =
   "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut";
@@ -37,28 +37,12 @@ const getActivityInformation = async code => {
       ACTIVITIES_TYPES[type].length
   );
 
-  console.log(ACTIVITIES_TYPES[type]);
+  console.log(
+    `maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
+  );
 
-  console.log(choice);
-
-  // console.log(
-  //   await client.findPlaceFromText({
-  //     input: ACTIVITIES_TYPES[type][choice],
-  //     inputtype: PlaceInputType.textQuery
-  //   })
-  // );
-
-  // console.log(
-  //   `https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&key=${GOOGLE_API_KEY}`
-  // );
   const resp = await fetch(
-    `maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry`,
-    {
-      mode: "cors",
-      headers: {
-        "Access-Control-Allow-Origin": "https://maps.googleapis.com"
-      }
-    }
+    `maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
   );
 
   const json = await resp.json();
@@ -68,7 +52,9 @@ const getActivityInformation = async code => {
   const place = json.candidates[0];
 
   const address = place.formatted_address.split(" ");
-
+  console.log(
+    `maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
+  );
   const resp2 = await fetch(
     `maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
   );
@@ -100,9 +86,7 @@ const getSchedule = async weather => {
 
   let dateString;
 
-  console.log(date);
-
-  const diff = differenceInHours(currentDate, date);
+  const diff = differenceInHours(date, currentDate);
 
   if (diff < 2) {
     dateString = "Now";
@@ -115,9 +99,8 @@ const getSchedule = async weather => {
   );
   return {
     location: activityInformation.location,
-    country: activityInformation.country,
     time: dateString,
-    img: "sunny.svg",
+    img: weather.weather[0].main,
     weather: weather.weather[0].main,
     temp: weather.main.temp,
     description: DESCRIPTION
@@ -136,12 +119,14 @@ const Schedule = () => {
       );
       const json = await response.json();
 
+      console.log(json);
+
       if (json.cod === "200" && json.list) {
-        const data = new Set();
+        const data = [];
 
         for (const forecast of json.list.slice(0, 8)) {
           let s = await getSchedule(forecast);
-          data.add(s);
+          data.push(s);
         }
         setSchedule(data);
       }
@@ -154,9 +139,14 @@ const Schedule = () => {
         payload: {
           country: weatherData.sys.country,
           city: weatherData.name,
-          weather: state.weather
+          weather: weatherData.weather[0].main
         }
       });
+
+      return {
+        country: weatherData.sys.country,
+        city: weatherData.name
+      };
     };
 
     if (state.lat && state.long) {
@@ -172,18 +162,20 @@ const Schedule = () => {
             long: longitude
           }
         });
-        fetchLocationData(latitude, longitude).then(() => {
-          fetchData(state.city, state.country);
+
+        fetchLocationData(latitude, longitude).then(({ country, city }) => {
+          console.log(country, city);
+          fetchData(city, country);
         });
       });
     }
   }, [
-    state.country,
-    state.city,
     state.lat,
     state.long,
     state.weather,
-    dispatch
+    dispatch,
+    state.city,
+    state.country
   ]);
 
   return (
@@ -194,7 +186,6 @@ const Schedule = () => {
             <ScheduleCard
               key={index}
               location={s.location}
-              country={s.country}
               time={s.time}
               img={s.img}
               temp={s.temp}

@@ -38,7 +38,7 @@ const Home = () => {
         city: json.name,
         temp: Math.floor(json.main.temp),
         windSpeed: json.wind.speed,
-        time: format(today, "h:m"),
+        time: format(today, "h:mm"),
         date: format(today, "EEEE do"),
         weather: json.weather[0].main
       };
@@ -65,7 +65,7 @@ const Home = () => {
   return (
     <>
       <CityTitle date={data.date} time={data.time} city={data.city} />
-      <Temperature temp={data.temp + "°C"} />
+      <Temperature temp={`${data.temp}°C`} />
       <WindRain speed={data.windSpeed} />
       <Weather weather={data.weather} />
     </>

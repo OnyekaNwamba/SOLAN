@@ -14,27 +14,24 @@ import Schedule from "./Components/Schedule/Schedule";
 
 import { useStore } from "./stores/root";
 
+const BACKGROUNDS = {
+  Clouds: `url(${CloudImage})`,
+  Rain: `url(${RainImage})`,
+  Clear: `url(${SunnyImage})`,
+  Drizzle: `url(${DrizzleImage})`,
+  Snow: `url(${SnowImage})`,
+  Thunderstorm: `url(${ThunderstormImage})`
+};
 
 const App = () => {
   const { state } = useStore();
 
-
-  function handleWeatherChange(weather) {
-    if (weather === "Clouds") return `url(${CloudImage})`;
-    else if (weather === "Rain") return `url(${RainImage})`;
-    else if (weather === "Clear") return `url(${SunnyImage})`;
-    else if (weather === "Drizzle") return `url(${DrizzleImage})`;
-    else if (weather === "Snow") return `url(${SnowImage})`;
-    else if (weather === "Thunderstorm") return `url(${ThunderstormImage})`;
-    else {
-      return null;
-    }
-  }
-
   return (
     <div
       className={"container"}
-      style={{ backgroundImage: handleWeatherChange(state.weather) }}
+      style={{
+        backgroundImage: BACKGROUNDS[state.weather]
+      }}
     >
       <Menu />
       <Routes>
