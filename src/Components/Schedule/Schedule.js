@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
+import { fetchWeatherData, fetchCoordinates } from "../../utils";
 
-const API_KEY = "PASTE_YOUR_KEY";
-const GOOGLE_API_KEY = "PASTE_YOUR_KEY";
+const API_KEY = "4cf005fc4c6aec74d7c2332416ca2f39";
+const GOOGLE_API_KEY = "AIzaSyDSyuhJ8PxpOEPUeyAa1sXk9ECaBJlmkEg";
 
 const DESCRIPTION =
   "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut";
@@ -112,17 +113,6 @@ const getSchedule = async weather => {
   const activityInformation = await getActivityInformation(
     weather.weather[0].id
   );
-
-  console.log({
-    location: activityInformation.location,
-    country: activityInformation.country,
-    time: dateString,
-    img: "sunny.svg",
-    weather: weather.weather[0].main,
-    temp: weather.main.temp,
-    description: DESCRIPTION
-  });
-
   return {
     location: activityInformation.location,
     country: activityInformation.country,
@@ -135,7 +125,7 @@ const getSchedule = async weather => {
 };
 
 const Schedule = () => {
-  const { state } = useStore();
+  const { state, dispatch } = useStore();
 
   const [schedule, setSchedule] = useState([]);
 
@@ -147,25 +137,59 @@ const Schedule = () => {
       const json = await response.json();
 
       if (json.cod === "200" && json.list) {
-        const data = [];
+        const data = new Set();
 
         for (const forecast of json.list.slice(0, 8)) {
           let s = await getSchedule(forecast);
-          data.push(s);
+          data.add(s);
         }
         setSchedule(data);
       }
     };
+
+    const fetchLocationData = async (lat, long) => {
+      const weatherData = await fetchWeatherData(lat, long);
+      dispatch({
+        type: "SET_WEATHER_INFO",
+        payload: {
+          country: weatherData.sys.country,
+          city: weatherData.name,
+          weather: state.weather
+        }
+      });
+    };
+
     if (state.lat && state.long) {
       fetchData(state.city, state.country);
+    } else {
+      fetchCoordinates(pos => {
+        const { latitude, longitude } = pos.coords;
+
+        dispatch({
+          type: "SET_COORDS",
+          payload: {
+            lat: latitude,
+            long: longitude
+          }
+        });
+        fetchLocationData(latitude, longitude).then(() => {
+          fetchData(state.city, state.country);
+        });
+      });
     }
-  }, [state.country, state.city, state.lat, state.long]);
+  }, [
+    state.country,
+    state.city,
+    state.lat,
+    state.long,
+    state.weather,
+    dispatch
+  ]);
 
   return (
     <>
       {schedule.length > 0 ? (
         schedule.map((s, index) => {
-          console.log(s);
           return (
             <ScheduleCard
               key={index}
