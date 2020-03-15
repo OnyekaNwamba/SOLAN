@@ -1,9 +1,9 @@
-
 import "./menu.css";
 
+import { Link, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
-import { Link, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { useStore } from "../../stores/root";
 
 const items = [
   {
@@ -21,20 +21,31 @@ const items = [
 ];
 
 const Menu = () => {
-  const [selected, setSelected] = useState(0);
+  const location = useLocation().pathname;
+
+  const [selected, setSelected] = useState(location);
+
+  useEffect(() => {
+    setSelected(location);
+  }, [location]);
 
   const handleClick = index => {
     setSelected(index);
   };
 
   const listItems = items.map((item, index) => (
-    <Link to={item.path}>
+    <Link
+      to={item.path}
+      onClick={() => {
+        handleClick(index);
+      }}
+    >
       <li
-        key={item}
+        key={`${item.text}-${item.path}`}
         onClick={() => {
           handleClick(index);
         }}
-        className={`${selected === index ? "selected pa-1" : "pa-1"}`}
+        className={`${selected === item.path ? "selected pa-1" : "pa-1"}`}
       >
         {item.text}
       </li>

@@ -9,12 +9,15 @@ import SunnyImage from "./assets/sunny_bg.png";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
-import React from "react";
+import React, { useState } from "react";
 import Schedule from "./Components/Schedule/Schedule";
+
 import { useStore } from "./stores/root";
+
 
 const App = () => {
   const { state } = useStore();
+
 
   function handleWeatherChange(weather) {
     if (weather === "Clouds") return `url(${CloudImage})`;

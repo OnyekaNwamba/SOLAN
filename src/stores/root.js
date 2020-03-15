@@ -14,15 +14,11 @@ const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {
     case "SET_COORDS":
       return { ...state, lat: action.payload.lat, long: action.payload.long };
-    case "SET_COUNTRY":
+    case "SET_WEATHER_INFO":
       return {
         ...state,
         country: action.payload.country,
-        city: action.payload.city
-      };
-    case "SET_WEATHER":
-      return {
-        ...state,
+        city: action.payload.city,
         weather: action.payload.weather
       };
     default:
