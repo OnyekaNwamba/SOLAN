@@ -12,7 +12,7 @@ const GOOGLE_API_KEY = "";
 const DESCRIPTION =
   "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut";
 
-const getActivityInformation = async code => {
+const getActivityInformation = async (code, lat, long) => {
   let type;
   if (code < 300 && code >= 200) {
     type = "Thunderstorm";
@@ -32,40 +32,45 @@ const getActivityInformation = async code => {
     throw new Error("Unknown weather type");
   }
 
-  const choice = Math.floor(
+  let choice = Math.floor(
     Math.random(0, ACTIVITIES_TYPES[type].length) *
       ACTIVITIES_TYPES[type].length
   );
 
-  console.log(
-    `maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
+  let resp = await fetch(
+    `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIES_TYPES[type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
   );
 
-  const resp = await fetch(
-    `maps/api/place/findplacefromtext/json?key=${GOOGLE_API_KEY}&input=${ACTIVITIES_TYPES[type][choice]}&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
-  );
+  let json = await resp.json();
 
-  const json = await resp.json();
+  console.log(json.results);
 
-  console.log(json);
+  while (json.results.length === 0) {
+    choice = Math.floor(
+      Math.random(0, ACTIVITIES_TYPES[type].length) *
+        ACTIVITIES_TYPES[type].length
+    );
+    resp = await fetch(
+      `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIES_TYPES[type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
+    );
 
-  const place = json.candidates[0];
+    json = await resp.json();
+  }
 
-  const address = place.formatted_address.split(" ");
-  console.log(
-    `maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
-  );
+  const place = json.results[0];
+  const address = place.plus_code.compound_code.split(",")[0].split(" ");
+
   const resp2 = await fetch(
     `maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
   );
 
-  console.log(json);
+  // console.log(json);
 
-  console.log(await resp2.json());
+  // console.log(await resp2.json());
 
   return {
     location: place.name,
-    country: address[address.length - 1],
+
     rating: place.rating
   };
 };
@@ -80,7 +85,7 @@ const ACTIVITIES_TYPES = {
   Clouds: ["tourist attractions", "go karting", "restaurant", "theater"]
 };
 
-const getSchedule = async weather => {
+const getSchedule = async (weather, lat, long) => {
   const currentDate = new Date();
   const date = new Date(weather.dt_txt);
 
@@ -95,7 +100,9 @@ const getSchedule = async weather => {
   }
 
   const activityInformation = await getActivityInformation(
-    weather.weather[0].id
+    weather.weather[0].id,
+    lat,
+    long
   );
   return {
     location: activityInformation.location,
@@ -125,7 +132,7 @@ const Schedule = () => {
         const data = [];
 
         for (const forecast of json.list.slice(0, 8)) {
-          let s = await getSchedule(forecast);
+          let s = await getSchedule(forecast, state.lat, state.long);
           data.push(s);
         }
         setSchedule(data);
@@ -187,7 +194,7 @@ const Schedule = () => {
               key={index}
               location={s.location}
               time={s.time}
-              img={s.img}
+              icon={s.img}
               temp={s.temp}
               weather={s.weather}
               description={s.description}

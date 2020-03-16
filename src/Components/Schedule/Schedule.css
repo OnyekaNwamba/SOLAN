@@ -4,7 +4,13 @@
   flex-grow: 1;
   flex-shrink: 1;
   text-align: left;
-  flex-direction: row;
+  /* flex-direction: row; */
+}
+
+.container {
+  margin: 0 auto;
+  position: relative;
+  width: auto;
 }
 
 .header p {
