@@ -1,9 +1,7 @@
 import "./menu.css";
 
-import { Link, useLocation, useParams, useRouteMatch } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-
-import { useStore } from "../../stores/root";
 
 const items = [
   {
@@ -30,7 +28,7 @@ const Menu = () => {
   }, [location]);
 
   const handleClick = index => {
-    setSelected(index);
+    setSelected(items[index].path);
   };
 
   const listItems = items.map((item, index) => (
