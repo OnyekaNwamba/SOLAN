@@ -9,11 +9,12 @@ import SunnyImage from "./assets/sunny_bg.png";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import Schedule from "./Components/Schedule/Schedule";
 
 import { useStore } from "./stores/root";
-
+import { Loader } from "@googlemaps/loader";
+const GOOGLE_API_KEY = "AIzaSyAtxOe1Qu58i82v-2t5ZIw6CsHn3nrpXWk";
 const BACKGROUNDS = {
   Clouds: `url(${CloudImage})`,
   Rain: `url(${RainImage})`,
@@ -25,6 +26,20 @@ const BACKGROUNDS = {
 
 const App = () => {
   const { state } = useStore();
+
+  useEffect(() => {
+    const loader = new Loader({
+      apiKey: GOOGLE_API_KEY,
+      libraries: ["places"]
+    });
+
+    if (window.google) {
+      return;
+    } else {
+      loader.load();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.google]);
 
   return (
     <div
