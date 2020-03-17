@@ -9,7 +9,7 @@
     width: 26.29px;
     height: 13.64px;
     left: 222px;
-    top: 522px;
+    top: 520.5px;
 
     font-family: Product Sans;
     font-style: normal;
@@ -20,7 +20,7 @@
     display: flex;
     align-items: center;
 
-    color: #000000;
+    color: #424242;
 
 }
 
@@ -29,7 +29,7 @@
     width: 43px;
     height: 14px;
     left: 293px;
-    top: 522px;
+    top: 520.5px;
 
     font-family: Product Sans;
     font-style: normal;
@@ -40,7 +40,7 @@
     display: flex;
     align-items: center;
 
-    color: #000000;
+    color: #424242;
 }
 
 .wind-image {
@@ -50,12 +50,13 @@
     height: 13.64px;
     left: 276px;
     top: 532px;
+    background:none;
 }
 
 .rain-image {
     /* Vector */
     position: absolute;
-    left: 70%;
+    left: 73%;
     right: 27.78%;
     top: 532px;
     bottom: 16.36%;
@@ -70,7 +71,7 @@
     height: 15px;
     left: 267px;
     top: 532px;
-    background: #000000;
+    background: #4E4E4E;
 }
 .bar {
     /* Group 10 */
