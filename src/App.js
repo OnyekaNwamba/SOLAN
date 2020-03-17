@@ -14,7 +14,8 @@ import Schedule from "./Components/Schedule/Schedule";
 
 import { useStore } from "./stores/root";
 import { Loader } from "@googlemaps/loader";
-const GOOGLE_API_KEY = "AIzaSyAtxOe1Qu58i82v-2t5ZIw6CsHn3nrpXWk";
+import { GOOGLE_API_KEY } from "./utils";
+
 const BACKGROUNDS = {
   Clouds: `url(${CloudImage})`,
   Rain: `url(${RainImage})`,

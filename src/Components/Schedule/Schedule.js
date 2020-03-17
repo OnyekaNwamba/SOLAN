@@ -7,14 +7,13 @@ import { useStore } from "../../stores/root";
 import {
   fetchWeatherData,
   fetchCoordinates,
-  genRandomNumber
+  genRandomNumber,
+  GOOGLE_API_KEY,
+  API_KEY
 } from "../../utils";
 
-const API_KEY = "PASTE_YOUR_API_KEY";
-const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
-
 const CACHE = {};
-const ACTIVITIE_CHOICES = {
+const ACTIVITY_CHOICES = {
   0: {
     //midnight
     Thunderstorm: ["hotel", "hostel"],
@@ -202,9 +201,9 @@ const getActivityInformation = async (code, lat, long, hour) => {
     throw new Error("Unknown weather type");
   }
 
-  let choice = genRandomNumber(ACTIVITIE_CHOICES[hour][type].length);
+  let choice = genRandomNumber(ACTIVITY_CHOICES[hour][type].length);
   let json;
-  let url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIE_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
+  let url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITY_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
 
   if (CACHE[url]) {
     json = CACHE[URL];
@@ -215,8 +214,8 @@ const getActivityInformation = async (code, lat, long, hour) => {
     CACHE[url] = json;
 
     while (json.results.length === 0) {
-      choice = genRandomNumber(ACTIVITIE_CHOICES[hour][type].length);
-      url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIE_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
+      choice = genRandomNumber(ACTIVITY_CHOICES[hour][type].length);
+      url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITY_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
 
       resp = await fetch(url);
 
@@ -230,10 +229,6 @@ const getActivityInformation = async (code, lat, long, hour) => {
     genRandomNumber(CACHE[url].results.length),
     1
   )[0];
-
-  console.log(json);
-  console.log("PLACE:", place);
-  // console.log(await resp2.json());
 
   return {
     location: place.name,
