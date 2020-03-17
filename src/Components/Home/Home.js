@@ -12,6 +12,7 @@ const Home = () => {
   const [data, setData] = useState({
     city: "Loading..",
     windSpeed: 0,
+    humidity: 0,
     temp: " ",
     date: " ",
     time: " ",
@@ -37,7 +38,8 @@ const Home = () => {
       return {
         city: json.name,
         temp: Math.floor(json.main.temp),
-        windSpeed: json.wind.speed,
+        windSpeed: Math.round(json.wind.speed*2.2369362920544025),
+        humidity: json.main.humidity,
         time: format(today, "h:mm"),
         date: format(today, "EEEE do"),
         weather: json.weather[0].main
@@ -66,7 +68,7 @@ const Home = () => {
     <>
       <CityTitle date={data.date} time={data.time} city={data.city} />
       <Temperature temp={`${data.temp}°C`} />
-      <WindRain speed={data.windSpeed} />
+      <WindRain speed={`${data.windSpeed} mph`} humidity={`${data.humidity}%`}/>
       <Weather weather={data.weather} />
     </>
   );
