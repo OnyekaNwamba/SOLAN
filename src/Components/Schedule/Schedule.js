@@ -1,18 +1,188 @@
 import "./Schedule.css";
-import { differenceInHours, format } from "date-fns";
+import { differenceInHours, format, getHours } from "date-fns";
 import React, { useEffect, useState } from "react";
 
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
-import { fetchWeatherData, fetchCoordinates } from "../../utils";
+import {
+  fetchWeatherData,
+  fetchCoordinates,
+  genRandomNumber
+} from "../../utils";
 
-const API_KEY = "";
-const GOOGLE_API_KEY = "";
+const API_KEY = "PASTE_YOUR_API_KEY";
+const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
 
-const DESCRIPTION =
-  "Lorem Ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut";
+const CACHE = {};
+const ACTIVITIE_CHOICES = {
+  0: {
+    //midnight
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub"],
+    Rain: ["Club", "Casino", "Bar"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub", "hotel"],
+    Clouds: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub"]
+  },
+  3: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: [
+      "club",
+      "casino",
+      "bar",
+      "rooftop bar",
+      "karaoke",
+      "pub",
+      "hotel",
+      "hostel"
+    ],
+    Rain: ["club", "casino", "bar", "hotel", "hostel"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub", "hotel"],
+    Clouds: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub"]
+  },
+  6: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: ["park", "cafe", "bakery", "hotel", "hostel", "gym"],
+    Rain: ["hotel", "hostel", "gym"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: ["park", "cafe", "bakery", "hotel", "hostel", "gym"],
+    Clouds: ["park", "cafe", "bakery", "hotel", "hostel", "gym"]
+  },
+  9: {
+    Thunderstorm: ["hotel", "hostel", "tourist attraction"],
+    Drizzle: [
+      "park",
+      "cafe",
+      "bakery",
+      "hotel",
+      "hostel",
+      "gym",
+      "tourist attraction"
+    ],
+    Rain: ["hotel", "hostel", "gym"],
+    Snow: ["hotel", "hostel"],
 
-const getActivityInformation = async (code, lat, long) => {
+    Atmosphere: ["hotel", "hostel"],
+    Clear: [
+      "park",
+      "cafe",
+      "bakery",
+      "hotel",
+      "hostel",
+      "gym",
+      "tourist attraction"
+    ],
+    Clouds: [
+      "park",
+      "cafe",
+      "bakery",
+      "hotel",
+      "hostel",
+      "gym",
+      "tourist attraction"
+    ]
+  },
+  12: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: [
+      "casino",
+      "bar",
+      "rooftop bar",
+      "karaoke",
+      "pub",
+      "restaurant",
+      "clothes shop",
+      "tourist attraction"
+    ],
+    Rain: ["casino", "pub", "restaurant", "tourist attraction"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: [
+      "casino",
+      "restaurant",
+      "bar",
+      "rooftop bar",
+      "tourist attraction",
+      "karaoke",
+      "pub",
+      "hotel",
+      "zoo",
+      "farm",
+      "park"
+    ],
+    Clouds: ["casino", "karaoke", "pub", "tourist attraction"]
+  },
+  15: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: ["casino", "pub", "cafe", "restaurant", "tourist attraction"],
+    Rain: ["casino", "pub", "restaurant", "tourist attraction"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: [
+      "casino",
+      "restaurant",
+      "karaoke",
+      "pub",
+      "hotel",
+      "zoo",
+      "farm",
+      "park"
+    ],
+    Clouds: [
+      "casino",
+      "restaurant",
+      "karaoke",
+      "pub",
+      "zoo",
+      "farm",
+      "park",
+      "tourist attraction"
+    ]
+  },
+  18: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: ["casino", "pub", "cafe", "minigolf", "golf", "laser tag"],
+    Rain: ["club", "casino", "bar", "pub"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: [
+      "club",
+      "casino",
+      "bar",
+      "rooftop bar",
+      "karaoke",
+      "pub",
+      "hotel",
+      "minigolf",
+      "golf",
+      "laser tag"
+    ],
+    Clouds: [
+      "club",
+      "casino",
+      "bar",
+      "rooftop bar",
+      "karaoke",
+      "pub",
+      "tourist attraction"
+    ]
+  },
+  21: {
+    Thunderstorm: ["hotel", "hostel"],
+    Drizzle: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub"],
+    Rain: ["club", "casino", "bar"],
+    Snow: ["hotel", "hostel"],
+    Atmosphere: ["hotel", "hostel"],
+    Clear: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub", "hotel"],
+    Clouds: ["club", "casino", "bar", "rooftop bar", "karaoke", "pub"]
+  }
+};
+
+const getActivityInformation = async (code, lat, long, hour) => {
   let type;
   if (code < 300 && code >= 200) {
     type = "Thunderstorm";
@@ -32,57 +202,48 @@ const getActivityInformation = async (code, lat, long) => {
     throw new Error("Unknown weather type");
   }
 
-  let choice = Math.floor(
-    Math.random(0, ACTIVITIES_TYPES[type].length) *
-      ACTIVITIES_TYPES[type].length
-  );
+  let choice = genRandomNumber(ACTIVITIE_CHOICES[hour][type].length);
+  let json;
+  let url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIE_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
 
-  let resp = await fetch(
-    `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIES_TYPES[type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
-  );
-
-  let json = await resp.json();
-
-  console.log(json.results);
-
-  while (json.results.length === 0) {
-    choice = Math.floor(
-      Math.random(0, ACTIVITIES_TYPES[type].length) *
-        ACTIVITIES_TYPES[type].length
-    );
-    resp = await fetch(
-      `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIES_TYPES[type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id`
-    );
+  if (CACHE[url]) {
+    json = CACHE[URL];
+  } else {
+    let resp = await fetch(url);
 
     json = await resp.json();
+    CACHE[url] = json;
+
+    while (json.results.length === 0) {
+      choice = genRandomNumber(ACTIVITIE_CHOICES[hour][type].length);
+      url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITIE_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
+
+      resp = await fetch(url);
+
+      CACHE[url] = await resp.json();
+
+      json = CACHE[url];
+    }
   }
 
-  const place = json.results[0];
-  const address = place.plus_code.compound_code.split(",")[0].split(" ");
+  const place = CACHE[url].results.splice(
+    genRandomNumber(CACHE[url].results.length),
+    1
+  )[0];
 
-  const resp2 = await fetch(
-    `maps/api/place/details/json?place_id=${place.place_id}&fields=name,rating,formatted_phone_number&key=${GOOGLE_API_KEY}`
-  );
-
-  // console.log(json);
-
+  console.log(json);
+  console.log("PLACE:", place);
   // console.log(await resp2.json());
 
   return {
     location: place.name,
-
+    marker: {
+      lat: place.geometry.location.lat,
+      long: place.geometry.location.lng
+    },
+    placeId: place.place_id,
     rating: place.rating
   };
-};
-
-const ACTIVITIES_TYPES = {
-  Thunderstorm: [""],
-  Drizzle: ["theater", "casino"],
-  Rain: ["museum", "restaurant", "movies", "spa"],
-  Snow: ["shopping mall", "cinema"],
-  Atmosphere: ["shopping mall"],
-  Clear: ["tourist attractions", "go karting", "theater"],
-  Clouds: ["tourist attractions", "go karting", "restaurant", "theater"]
 };
 
 const getSchedule = async (weather, lat, long) => {
@@ -102,15 +263,18 @@ const getSchedule = async (weather, lat, long) => {
   const activityInformation = await getActivityInformation(
     weather.weather[0].id,
     lat,
-    long
+    long,
+    getHours(date)
   );
+
   return {
+    placeId: activityInformation.placeId,
     location: activityInformation.location,
     time: dateString,
     img: weather.weather[0].main,
     weather: weather.weather[0].main,
     temp: weather.main.temp,
-    description: DESCRIPTION
+    marker: activityInformation.marker
   };
 };
 
@@ -131,7 +295,7 @@ const Schedule = () => {
       if (json.cod === "200" && json.list) {
         const data = [];
 
-        for (const forecast of json.list.slice(0, 8)) {
+        for (const forecast of json.list.slice(0, 9)) {
           let s = await getSchedule(forecast, state.lat, state.long);
           data.push(s);
         }
@@ -197,7 +361,8 @@ const Schedule = () => {
               icon={s.img}
               temp={s.temp}
               weather={s.weather}
-              description={s.description}
+              marker={s.marker}
+              placeId={s.placeId}
             />
           );
         })

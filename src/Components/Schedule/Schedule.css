@@ -13,6 +13,11 @@
   width: auto;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
 .header p {
   margin: 0;
   padding: 0;

@@ -16,3 +16,6 @@ export const fetchCoordinates = async callback => {
     callback(pos);
   });
 };
+
+export const genRandomNumber = (hi, lo = 0) =>
+  Math.floor(Math.random(lo, hi) * hi);

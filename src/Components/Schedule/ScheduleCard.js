@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import SunnyImage from "../../assets/sunny.svg";
 import ThunderstormImage from "../../assets/thunder.svg";
 import CloudImage from "../../assets/cloudy.svg";
 import DrizzleImage from "../../assets/drizzle.svg";
+import "./Schedule.css";
 import Card from "../Card/Card";
 
 const ICONS = {
@@ -14,12 +15,62 @@ const ICONS = {
   Thunderstorm: `${ThunderstormImage}`
 };
 
-const ScheduleCard = ({ location, time, icon, temp, weather, description }) => {
+const ScheduleCard = ({
+  placeId,
+  location,
+  time,
+  icon,
+  temp,
+  weather,
+  marker
+}) => {
   const [expanded, setExpanded] = useState(false);
 
   const handleExpanded = () => {
     setExpanded(!expanded);
   };
+
+  const mapEl = useRef(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const map = new google.maps.Map(mapEl.current, {
+      zoom: 15,
+      center: {
+        lat: marker.lat,
+        lng: marker.long
+      }
+    });
+
+    const request = {
+      placeId,
+      fields: ["name", "formatted_address", "place_id", "geometry"]
+    };
+
+    // eslint-disable-next-line no-undef
+    const infoWindow = new google.maps.InfoWindow();
+
+    // eslint-disable-next-line no-undef
+    const service = new google.maps.places.PlacesService(map);
+
+    service.getDetails(request, (place, status) => {
+      // eslint-disable-next-line no-undef
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // eslint-disable-next-line no-undef
+        const marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        // eslint-disable-next-line no-undef
+        google.maps.event.addListener(marker, "click", () => {
+          infoWindow.setContent(
+            `<div><strong>${place.name}</strong><br>Place ID: ${place.place_id}<br>${place.formatted_address}</div>`
+          );
+          infoWindow.open(map, this);
+        });
+      }
+    });
+  }, []);
 
   return (
     <Card className="ma-3">
@@ -31,7 +82,10 @@ const ScheduleCard = ({ location, time, icon, temp, weather, description }) => {
           <p className="has-text-center">{weather}</p>
         </div>
         <div className="ml-2">
-          <h3>{location}</h3>
+          <h3 className="has-text-center">{location}</h3>
+          <div className="center">
+            <div style={{ height: "128px", width: "128px" }} ref={mapEl}></div>
+          </div>
         </div>
       </div>
 
