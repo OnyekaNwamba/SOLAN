@@ -14,6 +14,7 @@ const items = [
   },
   {
     text: "Next 5 days",
+    classes: "ml-5",
     path: "/next"
   }
 ];
@@ -43,7 +44,9 @@ const Menu = () => {
         onClick={() => {
           handleClick(index);
         }}
-        className={`${selected === item.path ? "selected pa-1" : "pa-1"}`}
+        className={`${item.classes ? item.classes : ""} ${
+          selected === item.path ? "selected pa-1" : "pa-1"
+        }`}
       >
         {item.text}
       </li>

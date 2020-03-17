@@ -16,3 +16,9 @@ export const fetchCoordinates = async callback => {
     callback(pos);
   });
 };
+
+export const genRandomNumber = (hi, lo = 0) =>
+  Math.floor(Math.random(lo, hi) * hi);
+
+export const GOOGLE_API_KEY = "PASTE_YOUR_API_KEY";
+export const API_KEY = "PASTE_YOUR_API_KEY";

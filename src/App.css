@@ -364,3 +364,7 @@ body {
 .rows:not(:last-child) {
   margin-bottom: calc(1.5rem - 0.75rem);
 }
+
+.has-text-center {
+  text-align: center !important;
+}
