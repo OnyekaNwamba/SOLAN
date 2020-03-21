@@ -54,7 +54,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/schedule" element={<Schedule />} />
+<<<<<<< HEAD
         <Route path="/next" element={<Forecast />} />        
+=======
+        <Route path="/next" element={<Forecast />} />
+
+>>>>>>> 0e567691adcb74e8f2e4af7e56cda7d6bf08c555
       </Routes>
     </div>
   );
