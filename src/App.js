@@ -11,6 +11,8 @@ import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
 import React, { useEffect } from "react";
 import Schedule from "./Components/Schedule/Schedule";
+import Forecast from "./Components/Forecast/Forecast";
+
 
 import { useStore } from "./stores/root";
 import { Loader } from "@googlemaps/loader";
