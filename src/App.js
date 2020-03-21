@@ -53,6 +53,8 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/next" element={<Forecast />} />
+
       </Routes>
     </div>
   );
