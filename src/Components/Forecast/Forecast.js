@@ -1,5 +1,6 @@
 import "./Forecast.css";
 import React, { useEffect, useState } from "react";
+import { useStore } from "../../stores/root";
 
 import SunnyImage from "../../assets/sunny.svg";
 import ThunderstormImage from "../../assets/thunder.svg";
@@ -11,9 +12,9 @@ import divisorImage from "./dividor.png";
 import rainImage from "./Vector.png";
 import windImage from "./wind-image.svg";
 
-const API_KEY = "a889a89ba1a6877ed0364717a0d1e877";
+//const API_KEY = "a889a89ba1a6877ed0364717a0d1e877";
 //const API_KEY = "b6907d289e10d714a6e88b30761fae22";
-//const API_KEY = "9061b7e2f07c411fdaf15c394b285e0b";
+const API_KEY = "9061b7e2f07c411fdaf15c394b285e0b";
 //const API_KEY = "3585775f387b0d0cba6c5b3dc41b8167";
 const days = ["SUN","MON","TUE","WED","THURS","FRI","SAT"];
 
@@ -117,6 +118,8 @@ function getNextDayForecast(json){
 }
     
 const Forecast = () => {
+
+    const { state } = useStore();
     const [position, setPosition] = useState({
         lat: 0,
         long: 0,
@@ -129,9 +132,10 @@ const Forecast = () => {
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
             );
-            
+
             const json = await response.json();
             console.log(json);
+
             let weatherData=[];
             weatherData = getNextDayForecast(json);
             setForecast(weatherData);
@@ -148,8 +152,10 @@ const Forecast = () => {
                 long: position.coords.longitude,
             })
         }
+
         fetchData(position.lat, position.long);
-    });
+
+    }, [state.weather]);
 
     return(
         <>
@@ -188,4 +194,3 @@ const Forecast = () => {
 }
 
 export default Forecast;
-  
