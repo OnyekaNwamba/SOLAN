@@ -11,7 +11,7 @@ import divisorImage from "./dividor.png";
 import rainImage from "./Vector.png";
 import windImage from "./wind-image.svg";
 
-//const API_KEY = "a889a89ba1a6877ed0364717a0d1e877";
+const API_KEY = "a889a89ba1a6877ed0364717a0d1e877";
 //const API_KEY = "b6907d289e10d714a6e88b30761fae22";
 //const API_KEY = "9061b7e2f07c411fdaf15c394b285e0b";
 //const API_KEY = "3585775f387b0d0cba6c5b3dc41b8167";

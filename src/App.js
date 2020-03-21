@@ -11,6 +11,7 @@ import Home from "./Components/Home/Home";
 import Menu from "./Components/Menu/Menu";
 import React, { useEffect } from "react";
 import Schedule from "./Components/Schedule/Schedule";
+import Forecast from "./Components/Forecast/Forecast";
 
 import { useStore } from "./stores/root";
 import { Loader } from "@googlemaps/loader";
@@ -53,6 +54,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/schedule" element={<Schedule />} />
+        <Route path="/next" element={<Forecast />} />        
       </Routes>
     </div>
   );
