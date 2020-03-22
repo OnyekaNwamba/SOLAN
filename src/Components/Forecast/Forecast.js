@@ -43,6 +43,7 @@ function getTotal(map, day, current){
         return current;
 }
 
+/* Returns array of keys with equal maximum value */
 function getMax(object){
     return Object.keys(object).filter(x => {
         return object[x] == Math.max.apply(null, 
@@ -50,6 +51,8 @@ function getMax(object){
   });
 }
 
+/* Out of the most recorded weather conditions 
+    */  
 function chooseWeather(arr){
     const maxWeather = new Map();
     for(let i =0;i<arr.length;i++){
@@ -74,16 +77,22 @@ function chooseWeather(arr){
         return arr[Math.floor(Math.random() *arr.length)];
 }
 
+/* Gets the weather forecast details for the next four days 
+    Does not include today's weather condition */
 function getNextDayForecast(json){
+    const today = new Date();
+    const firstDay = days[today.getDay()];
+    const fifthDate = new Date(today);
+    fifthDate.setDate(fifthDate.getDate() + 5);
+    const fifthDay = days[fifthDate.getDay()];
 
-    let firstDay = days[new Date().getDay()];
+    const keys = [];
+    const data = [];
 
     const avgTemp = new Map();
     const avgHumid = new Map();
     const avgWind = new Map();
     let chosen_weather= "";
-
-    const keys = [];
 
     let weathers = {
         "Clouds": 0,
@@ -96,24 +105,21 @@ function getNextDayForecast(json){
 
     for(let i = 0;i<json.list.length;i++){
         let day = getTimestampDay(json.list[i].dt);
-
-        if(day == firstDay)
+        if(day == firstDay) // skip first day
             continue;
-        
+        if(day == fifthDay) // stop on fifth day
+            break;
+
         let current_temp = json.list[i].main.temp;
         let current_humid = json.list[i].main.humidity;
         let current_wind = json.list[i].wind.speed;
         let current_weather = json.list[i].weather[0].main;
 
-        if (avgTemp.has(day)){
-            let temp = avgTemp.get(day);
-            let total = temp+current_temp;
-            avgTemp.set(day, total);
-        }
-        else{
-            avgTemp.set(day, current_temp);
+        if(!avgTemp.has(day))
             keys.push(day);
-        }
+
+        let totalTemp = getTotal(avgTemp, day, current_temp);
+        avgTemp.set(day, totalTemp);
 
         let totalHumid = getTotal(avgHumid, day, current_humid);
         avgHumid.set(day, totalHumid);
@@ -121,22 +127,18 @@ function getNextDayForecast(json){
         let totalWind = getTotal(avgWind, day, current_wind);
         avgWind.set(day,totalWind);
 
-        weathers[current_weather] = weathers[current_weather] + 1;
+        weathers[current_weather]++;
     }
 
-    let max = [];
-    max = getMax(weathers);
-
+    let max = getMax(weathers);
     if(max.length == 1)
         chosen_weather = max[0];
     else
         chosen_weather = chooseWeather(max);
 
-    const data = [];
     for(let j = 0; j<keys.length;j++){
-
         let parse_temp = Math.floor(avgTemp.get(keys[j])/8);
-        let parse_wind = Math.round((avgWind.get(keys[j])/8)*2.2369362920544025);
+        let parse_wind = Math.round((avgWind.get(keys[j])/8));
         let parse_humid = Math.floor(avgHumid.get(keys[j])/8);
         
         data.push({
@@ -197,19 +199,21 @@ const Forecast = () => {
                 return (
                     <div className="forecastCard ma-3">
                     <div className="forecastDisplay">
-                    <div className="leftSide">
-                    <div className="dayText">{s.day}</div>
-                    <p className="tempText">{s.temp}°C</p>
-                    <p className="weatherText">{s.weather}</p>
-                    </div>
-                    <img className="iconImg" src={ICONS[s.weather]}></img>
-                    <div className="windRain">
-                    <p className="rainText">{s.humidity} %</p>
-                    <img className={"rainImg"} src={rainImage} />
-                    <img className={"dividorImg"} src={divisorImage} />
-                    <img className={"windImg"} src={windImage} />
-                    <p className="windText">{s.wind} mph</p>
-                    </div>
+                        <div className="leftSide">
+                            <div className="dayText">{s.day}</div>
+                            <p className="tempText">{s.temp}°C</p>
+                            <p className="weatherText">{s.weather}</p>
+                        </div>
+
+                        <img className="iconImg" src={ICONS[s.weather]}></img>
+
+                        <div className="windRain">
+                            <p className="rainText">{s.humidity} %</p>
+                            <img className={"rainImg"} src={rainImage} />
+                            <img className={"dividorImg"} src={divisorImage} />
+                            <img className={"windImg"} src={windImage} />
+                            <p className="windText">{s.wind} m/s</p>
+                        </div>
                     </div>
                     </div>
 
