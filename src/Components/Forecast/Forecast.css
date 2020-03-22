@@ -12,10 +12,9 @@
       color: #4a4a4a;
       display: block;
       width:80%;
-      margin-top:1.5em;
       margin-left:auto;
       margin-right:auto;
-      padding: 1.25rem;
+      padding: 1rem;
   }
   
   .forecastDisplay {
@@ -24,7 +23,7 @@
     flex-basis: auto;
     flex-grow: 1;
     flex-shrink: 1;
-    /* flex-direction: row; */
+     /*flex-direction: row; */
   }
   
   
@@ -38,14 +37,19 @@
   }
   
   .dayText{
-    font-weight:bolder;
-    font-size:20px;
+    font-weight:900;
+    font-size:25px;
     text-transform: uppercase;
-    padding-bottom:1em;
+    padding-bottom:0.7em;
+  }
+
+  .tempText{
+    font-weight:600;
   }
   
   .weatherText{
     color:#797979;
+    font-weight:700;
   }
   
   /* Icon */
@@ -56,8 +60,8 @@
     padding:0;
     margin-left:4.5em;
     margin-top:1.5em;
-    max-width:55px;
-    max-height:50px;
+    width:70px;
+    height:70px;
   }
   
   /*Wind rain*/
@@ -77,7 +81,7 @@
       font-style: normal;
       font-weight: bold;
       display:unset;
-      font-size: 11.5px;
+      font-size: 13px;
       color: #424242;
       position:absolute;
       top:-1.5em;
@@ -86,22 +90,20 @@
   .windText {
       font-family: Product Sans;
       font-style: normal;
-      font-weight: bold;
-      font-size: 11.5px;
+      font-weight:900;
+      font-size: 13px;
       color: #424242;
       display: unset;
-      text-align: right;
-  
       position:absolute;
       top:-1.5em;
-      left:7.2em;
+      left:6.4em;
   }
   
   .windImg {
       /* weather 1 */
       position: absolute;
-      width:12px;
-      height:14px;
+      width:14px;
+      height:16px;
       background:none;
       margin-top:-0.3em;
       left:4em;
@@ -111,8 +113,8 @@
       /* Vector */
       position: absolute;
       background:none;
-      width:8px;
-      height:13px;
+      width:10px;
+      height:15px;
       left:2em;
       margin-top:-0.3em; 
       /*background: #2196F3;*/
@@ -121,8 +123,8 @@
   .dividorImg {
       /* Rectangle 12 */
       position: inherit;
-      width: 3px;
-      height: 15px;
+      width: 4px;
+      height: 19px;
       background: #4E4E4E;
       left:3.2em;
       margin-top:-0.4em;

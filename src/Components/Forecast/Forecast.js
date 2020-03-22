@@ -1,21 +1,22 @@
 import "./Forecast.css";
 import React, { useEffect, useState } from "react";
+import { useStore } from "../../stores/root";
+import { API_KEY } from "../../utils";
 
+/* Weather icons */
 import SunnyImage from "../../assets/sunny.svg";
 import ThunderstormImage from "../../assets/thunder.svg";
 import CloudImage from "../../assets/cloudy.svg";
 import DrizzleImage from "../../assets/drizzle.svg";
 import SnowImage from "../../assets/snow.svg";
 import RainImage from "../../assets/rain.svg";
+
+/* Misc icons */
 import divisorImage from "./dividor.png";
 import rainImage from "./Vector.png";
 import windImage from "./wind-image.svg";
 
-const API_KEY = "a889a89ba1a6877ed0364717a0d1e877";
-//const API_KEY = "b6907d289e10d714a6e88b30761fae22";
-//const API_KEY = "9061b7e2f07c411fdaf15c394b285e0b";
-//const API_KEY = "3585775f387b0d0cba6c5b3dc41b8167";
-const days = ["SUN","MON","TUE","WED","THURS","FRI","SAT"];
+const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
 
 const ICONS = {
     Clouds: `${CloudImage}`,
@@ -25,25 +26,6 @@ const ICONS = {
     Snow: `${SnowImage}`,
     Thunderstorm: `${ThunderstormImage}`
 };
-
-function getWeatherCondition(code){
-    if (code < 300 && code >= 200) {
-      return "Thunderstorm";
-    } else if (code < 400 && code >= 300) {
-      return "Drizzle";
-    } else if (code < 600 && code >= 500) {
-      return "Rain";
-    } else if (code < 700 && code >= 600) {
-      return "Snow";
-    } else if (code === 800) {
-      return "Clear";
-    } else if (code < 900 && code > 800) {
-      return "Clouds";
-    } else {
-        console.log(code);
-        return "Clouds";
-    }
-}
 
 function getTimestampDay(timestamp){
     let date = new Date(timestamp*1000);
@@ -61,6 +43,37 @@ function getTotal(map, day, current){
         return current;
 }
 
+function getMax(object){
+    return Object.keys(object).filter(x => {
+        return object[x] == Math.max.apply(null, 
+        Object.values(object));
+  });
+}
+
+function chooseWeather(arr){
+    const maxWeather = new Map();
+    for(let i =0;i<arr.length;i++){
+        maxWeather.set(arr[i],"");
+    }
+
+    if(maxWeather.has("Rain") && maxWeather.has("Thunderstorm"))
+        return "Thunderstorm";
+    else if(maxWeather.has("Rain") && maxWeather.has("Drizzle"))
+        return "Rain";
+    else if( (maxWeather.has("Clear") || maxWeather.has("Clouds")) && maxWeather.has("Thunderstorm") )
+        return "Thunderstorm";
+    else if( (maxWeather.has("Clear") || maxWeather.has("Clouds")) && maxWeather.has("Rain") )
+        return "Rain";
+    else if( (maxWeather.has("Clear") || maxWeather.has("Clouds")) && maxWeather.has("Drizzle") )
+        return "Drizzle";
+    else if(maxWeather.has("Clear") && maxWeather.has("Clouds"))
+        return "Clear";
+    else if(maxWeather.has("Snow") && (maxWeather.has("Clouds") || maxWeather.has("Clear")) ) 
+        return "Snow";
+    else
+        return arr[Math.floor(Math.random() *arr.length)];
+}
+
 function getNextDayForecast(json){
 
     let firstDay = days[new Date().getDay()];
@@ -68,9 +81,18 @@ function getNextDayForecast(json){
     const avgTemp = new Map();
     const avgHumid = new Map();
     const avgWind = new Map();
-    const avgWeather = new Map();
+    let chosen_weather= "";
 
     const keys = [];
+
+    let weathers = {
+        "Clouds": 0,
+        "Clear": 0,
+        "Rain": 0,
+        "Drizzle": 0,
+        "Thunderstorm": 0,
+        "Snow": 0,
+    }
 
     for(let i = 0;i<json.list.length;i++){
         let day = getTimestampDay(json.list[i].dt);
@@ -81,8 +103,8 @@ function getNextDayForecast(json){
         let current_temp = json.list[i].main.temp;
         let current_humid = json.list[i].main.humidity;
         let current_wind = json.list[i].wind.speed;
-        let current_weather = json.list[i].weather[0].id;
-        
+        let current_weather = json.list[i].weather[0].main;
+
         if (avgTemp.has(day)){
             let temp = avgTemp.get(day);
             let total = temp+current_temp;
@@ -99,24 +121,39 @@ function getNextDayForecast(json){
         let totalWind = getTotal(avgWind, day, current_wind);
         avgWind.set(day,totalWind);
 
-        let totalWeather = getTotal(avgWeather, day, current_weather);
-        avgWeather.set(day,totalWeather);
+        weathers[current_weather] = weathers[current_weather] + 1;
     }
+
+    let max = [];
+    max = getMax(weathers);
+
+    if(max.length == 1)
+        chosen_weather = max[0];
+    else
+        chosen_weather = chooseWeather(max);
 
     const data = [];
     for(let j = 0; j<keys.length;j++){
+
+        let parse_temp = Math.floor(avgTemp.get(keys[j])/8);
+        let parse_wind = Math.round((avgWind.get(keys[j])/8)*2.2369362920544025);
+        let parse_humid = Math.floor(avgHumid.get(keys[j])/8);
+        
         data.push({
             day: keys[j],
-            temp: Math.floor(avgTemp.get(keys[j])/8),
-            wind: Math.floor((avgWind.get(keys[j])/8)*2.2369362920544025),
-            humidity: Math.floor(avgHumid.get(keys[j])/8),
-            weather: (avgWeather.get(keys[j])/8),
+            temp: parse_temp,
+            wind: parse_wind,
+            humidity: parse_humid,
+            weather: chosen_weather,
         });
     }
     return data;
 }
-    
+
 const Forecast = () => {
+
+    const { state } = useStore();
+    
     const [position, setPosition] = useState({
         lat: 0,
         long: 0,
@@ -129,9 +166,10 @@ const Forecast = () => {
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
             );
-            
+
             const json = await response.json();
             console.log(json);
+
             let weatherData=[];
             weatherData = getNextDayForecast(json);
             setForecast(weatherData);
@@ -148,23 +186,24 @@ const Forecast = () => {
                 long: position.coords.longitude,
             })
         }
+
         fetchData(position.lat, position.long);
-    });
+
+    }, [state.weather]);
 
     return(
         <>
         {forecast.length > 0 ? (
             forecast.map((s) => {
                 return (
-
-                    <div className="forecastCard">
+                    <div className="forecastCard ma-3">
                     <div className="forecastDisplay">
                     <div className="leftSide">
                     <div className="dayText">{s.day}</div>
-                    <p>{s.temp}°C</p>
-                    <p className="weatherText">{getWeatherCondition(s.weather)}</p>
+                    <p className="tempText">{s.temp}°C</p>
+                    <p className="weatherText">{s.weather}</p>
                     </div>
-                    <img className="iconImg" src={ICONS[getWeatherCondition(s.weather)]}></img>
+                    <img className="iconImg" src={ICONS[s.weather]}></img>
                     <div className="windRain">
                     <p className="rainText">{s.humidity} %</p>
                     <img className={"rainImg"} src={rainImage} />

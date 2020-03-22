@@ -5,7 +5,7 @@ const defaultState = {
   long: null,
   country: " ",
   city: " ",
-  weather: "Snow"
+  weather: "Clear"
 };
 
 const StoreContext = createContext(null);

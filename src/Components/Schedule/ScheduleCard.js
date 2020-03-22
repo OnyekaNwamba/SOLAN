@@ -3,15 +3,17 @@ import SunnyImage from "../../assets/sunny.svg";
 import ThunderstormImage from "../../assets/thunder.svg";
 import CloudImage from "../../assets/cloudy.svg";
 import DrizzleImage from "../../assets/drizzle.svg";
+import SnowImage from "../../assets/snow.svg"
+import RainImage from "../../assets/rain.svg"
 import "./Schedule.css";
 import Card from "../Card/Card";
 
 const ICONS = {
   Clouds: `${CloudImage}`,
-  Rain: `${DrizzleImage}`,
+  Rain: `${RainImage}`,
   Clear: `${SunnyImage}`,
   Drizzle: `${DrizzleImage}`,
-  // Snow: `${SnowImage}`,
+  Snow: `${SnowImage}`,
   Thunderstorm: `${ThunderstormImage}`
 };
 
@@ -75,7 +77,7 @@ const ScheduleCard = ({
   return (
     <Card className="ma-3">
       <div className="header">
-        <div>
+        <div className="left">
           <h3>{time}</h3>
           <h3>{temp}°C</h3>
           <img src={ICONS[icon]} alt={icon} />
