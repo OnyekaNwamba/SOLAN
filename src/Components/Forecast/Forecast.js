@@ -153,7 +153,6 @@ function getNextDayForecast(json){
 const Forecast = () => {
 
     const { state } = useStore();
-    
     const [position, setPosition] = useState({
         lat: 0,
         long: 0,
@@ -227,4 +226,3 @@ const Forecast = () => {
 }
 
 export default Forecast;
-  
