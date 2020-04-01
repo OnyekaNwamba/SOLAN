@@ -28,3 +28,13 @@
   margin: 0;
   padding: 0;
 }
+
+.ml-2{
+width: 75%;
+margin: 0 auto;
+}
+
+.img {
+height: 96px;
+width: 96px;
+}
