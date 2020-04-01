@@ -31,14 +31,14 @@ body {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url("assets/sunny_bg.png");
   width: 360px;
   height: 560px;
   text-align: center;
   padding-top: 40px;
   margin: 0 auto;
   margin-top: 40px;
-  overflow: scroll; /*Remove later when*/
+  overflow-y:scroll;
+  overflow-x:hidden;
 }
 
 /*
@@ -364,4 +364,8 @@ body {
 
 .rows:not(:last-child) {
   margin-bottom: calc(1.5rem - 0.75rem);
+}
+
+.has-text-center {
+  text-align: center !important;
 }

@@ -4,7 +4,24 @@
   flex-grow: 1;
   flex-shrink: 1;
   text-align: left;
-  flex-direction: row;
+  /* flex-direction: row; */
+}
+
+.left{
+  text-align:center;
+  line-height:1.5em;
+  padding:0;
+}
+
+.container {
+  margin: 0 auto;
+  position: relative;
+  width: auto;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
 }
 
 .header p {

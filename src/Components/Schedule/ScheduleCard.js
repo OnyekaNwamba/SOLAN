@@ -1,15 +1,30 @@
-import React, { useState } from "react";
-
+import React, { useState, useRef, useEffect } from "react";
+import SunnyImage from "../../assets/sunny.svg";
+import ThunderstormImage from "../../assets/thunder.svg";
+import CloudImage from "../../assets/cloudy.svg";
+import DrizzleImage from "../../assets/drizzle.svg";
+import SnowImage from "../../assets/snow.svg"
+import RainImage from "../../assets/rain.svg"
+import "./Schedule.css";
 import Card from "../Card/Card";
 
+const ICONS = {
+  Clouds: `${CloudImage}`,
+  Rain: `${RainImage}`,
+  Clear: `${SunnyImage}`,
+  Drizzle: `${DrizzleImage}`,
+  Snow: `${SnowImage}`,
+  Thunderstorm: `${ThunderstormImage}`
+};
+
 const ScheduleCard = ({
+  placeId,
   location,
-  country,
   time,
-  img,
+  icon,
   temp,
   weather,
-  description
+  marker
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -17,23 +32,62 @@ const ScheduleCard = ({
     setExpanded(!expanded);
   };
 
+  const mapEl = useRef(null);
+
+  useEffect(() => {
+    // eslint-disable-next-line no-undef
+    const map = new google.maps.Map(mapEl.current, {
+      zoom: 15,
+      center: {
+        lat: marker.lat,
+        lng: marker.long
+      }
+    });
+
+    const request = {
+      placeId,
+      fields: ["name", "formatted_address", "place_id", "geometry"]
+    };
+
+    // eslint-disable-next-line no-undef
+    const infoWindow = new google.maps.InfoWindow();
+
+    // eslint-disable-next-line no-undef
+    const service = new google.maps.places.PlacesService(map);
+
+    service.getDetails(request, (place, status) => {
+      // eslint-disable-next-line no-undef
+      if (status === google.maps.places.PlacesServiceStatus.OK) {
+        // eslint-disable-next-line no-undef
+        const marker = new google.maps.Marker({
+          map: map,
+          position: place.geometry.location
+        });
+        // eslint-disable-next-line no-undef
+        google.maps.event.addListener(marker, "click", () => {
+          infoWindow.setContent(
+            `<div><strong>${place.name}</strong><br>Place ID: ${place.place_id}<br>${place.formatted_address}</div>`
+          );
+          infoWindow.open(map, this);
+        });
+      }
+    });
+  }, []);
+
   return (
     <Card className="ma-3">
       <div className="header">
-        <div>
-          <h3>
-            {time} {temp}
-          </h3>
-
-          <img src={require(`../../assets/${img}`)} alt={img} />
-
-          <p>{weather}</p>
+        <div className="left">
+          <h3>{time}</h3>
+          <h3>{temp}°C</h3>
+          <img src={ICONS[icon]} alt={icon} />
+          <p className="has-text-center">{weather}</p>
         </div>
         <div className="ml-2">
-          <h3>
-            {location},{country}
-          </h3>
-          {description}
+          <h3 className="has-text-center">{location}</h3>
+          <div className="center">
+            <div style={{ height: "128px", width: "128px" }} ref={mapEl}></div>
+          </div>
         </div>
       </div>
 

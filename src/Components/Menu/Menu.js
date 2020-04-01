@@ -1,9 +1,7 @@
-
 import "./menu.css";
 
-
-import { Link, useParams } from "react-router-dom";
-import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
 
 const items = [
   {
@@ -16,25 +14,39 @@ const items = [
   },
   {
     text: "Next 5 days",
+    classes: "ml-5",
     path: "/next"
   }
 ];
 
 const Menu = () => {
-  const [selected, setSelected] = useState(0);
+  const location = useLocation().pathname;
+
+  const [selected, setSelected] = useState(location);
+
+  useEffect(() => {
+    setSelected(location);
+  }, [location]);
 
   const handleClick = index => {
-    setSelected(index);
+    setSelected(items[index].path);
   };
 
   const listItems = items.map((item, index) => (
-    <Link to={item.path}>
+    <Link
+      to={item.path}
+      onClick={() => {
+        handleClick(index);
+      }}
+    >
       <li
-        key={item}
+        key={`${item.text}-${item.path}`}
         onClick={() => {
           handleClick(index);
         }}
-        className={`${selected === index ? "selected pa-1" : "pa-1"}`}
+        className={`${item.classes ? item.classes : ""} ${
+          selected === item.path ? "selected pa-1" : "pa-1"
+        }`}
       >
         {item.text}
       </li>
