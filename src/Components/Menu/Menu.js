@@ -13,7 +13,7 @@ const items = [
     path: "/schedule"
   },
   {
-    text: "Next 5 days",
+    text: "Next 4 days",
     classes: "ml-5",
     path: "/next"
   }
