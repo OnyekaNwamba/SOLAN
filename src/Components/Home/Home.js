@@ -38,7 +38,7 @@ const Home = () => {
       return {
         city: json.name,
         temp: Math.floor(json.main.temp),
-        windSpeed: Math.round(json.wind.speed*),
+        windSpeed: Math.round(json.wind.speed),
         humidity: json.main.humidity,
         time: format(today, "h:mm"),
         date: format(today, "EEEE do"),
