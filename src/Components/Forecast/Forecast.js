@@ -2,6 +2,7 @@ import "./Forecast.css";
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../stores/root";
 import { API_KEY } from "../../utils";
+import { fetchWeatherData, fetchCoordinates } from "../../utils";
 
 /* Weather icons */
 import SunnyImage from "../../assets/sunny.svg";
@@ -13,7 +14,7 @@ import RainImage from "../../assets/rain.svg";
 
 /* Misc icons */
 import divisorImage from "./dividor.png";
-import rainImage from "./Vector.png";
+import rainImage from "./rainImage.svg";
 import windImage from "./wind-image.svg";
 
 const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -41,6 +42,19 @@ function getTotal(map, day, current){
     }
     else
         return current;
+}
+
+function getHigh(map, day, current){
+    if (map.has(day)){
+        let temp = map.get(day);
+        let highest = current;
+	if (temp > highest){
+	    return temp
+	}
+	else{
+	    return highest
+	}	
+    }
 }
 
 /* Returns array of keys with equal maximum value */
@@ -118,7 +132,7 @@ function getNextDayForecast(json){
         if(!avgTemp.has(day))
             keys.push(day);
 
-        let totalTemp = getTotal(avgTemp, day, current_temp);
+        let totalTemp = getHigh(avgTemp, day, current_temp);
         avgTemp.set(day, totalTemp);
 
         let totalHumid = getTotal(avgHumid, day, current_humid);
@@ -137,7 +151,7 @@ function getNextDayForecast(json){
         chosen_weather = chooseWeather(max);
 
     for(let j = 0; j<keys.length;j++){
-        let parse_temp = Math.floor(avgTemp.get(keys[j])/8);
+        let parse_temp = Math.floor(avgTemp.get(keys[j]));
         let parse_wind = Math.round((avgWind.get(keys[j])/8));
         let parse_humid = Math.floor(avgHumid.get(keys[j])/8);
         
@@ -155,10 +169,6 @@ function getNextDayForecast(json){
 const Forecast = () => {
 
     const { state } = useStore();
-    const [position, setPosition] = useState({
-        lat: 0,
-        long: 0,
-    });
     const [forecast, setForecast] = useState([]);
 
     
@@ -182,13 +192,8 @@ const Forecast = () => {
             console.log("Geolocation not supported");
         
         function success(position){
-            setPosition({
-                lat: position.coords.latitude,
-                long: position.coords.longitude,
-            })
+	    fetchData(position.coords.latitude, position.coords.longitude);
         }
-
-        fetchData(position.lat, position.long);
 
     }, [state.weather]);
 
