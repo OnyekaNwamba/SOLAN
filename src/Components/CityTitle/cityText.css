@@ -36,13 +36,13 @@
 }
 
 .timeSpacing {
-  word-wrap: none;
-  white-space: nowrap;
-  padding-left: 1em;
-  text-align: inherit;
-  font-display: inherit;
-  display: inline;
-  position: relative;
+    left: -25px;
+    top: 35px;
+    font-family: Product Sans;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 12pt;
+    color: rgba(0, 0, 0, 0.7);
 }
 
 .cityText {
