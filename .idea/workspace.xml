@@ -17,10 +17,6 @@
       <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/rainImage.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/wind-image.svg" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/wind-rain.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CityTitle/CityTitle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Forecast/Forecast.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Forecast/Forecast.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -132,7 +128,7 @@
       <workItem from="1583162540617" duration="5160000" />
       <workItem from="1585774128780" duration="9086000" />
       <workItem from="1585789486069" duration="194000" />
-      <workItem from="1585822269947" duration="2184000" />
+      <workItem from="1585822269947" duration="2407000" />
     </task>
     <servers />
   </component>
