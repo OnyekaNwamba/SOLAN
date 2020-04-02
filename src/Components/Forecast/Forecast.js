@@ -2,6 +2,7 @@ import "./Forecast.css";
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../stores/root";
 import { API_KEY } from "../../utils";
+import { fetchWeatherData, fetchCoordinates } from "../../utils";
 
 /* Weather icons */
 import SunnyImage from "../../assets/sunny.svg";
@@ -13,7 +14,7 @@ import RainImage from "../../assets/rain.svg";
 
 /* Misc icons */
 import divisorImage from "./dividor.png";
-import rainImage from "./Vector.png";
+import rainImage from "./rainImage.svg";
 import windImage from "./wind-image.svg";
 
 const days = ["SUN","MON","TUE","WED","THU","FRI","SAT"];
@@ -155,10 +156,6 @@ function getNextDayForecast(json){
 const Forecast = () => {
 
     const { state } = useStore();
-    const [position, setPosition] = useState({
-        lat: 0,
-        long: 0,
-    });
     const [forecast, setForecast] = useState([]);
 
     
@@ -182,13 +179,8 @@ const Forecast = () => {
             console.log("Geolocation not supported");
         
         function success(position){
-            setPosition({
-                lat: position.coords.latitude,
-                long: position.coords.longitude,
-            })
+	    fetchData(position.coords.latitude, position.coords.longitude);
         }
-
-        fetchData(position.lat, position.long);
 
     }, [state.weather]);
 
