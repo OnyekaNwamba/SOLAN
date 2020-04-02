@@ -2,12 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7db919c3-1b7c-44f6-82b3-f80491c8e3bc" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CityTitle/cityText.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CityTitle/cityText.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/Menu.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/Menu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/Menu/menu.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/Menu/menu.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Menu/Menu.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Menu/current.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Menu/menu.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Menu/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Temperature/Temperature.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Temperature/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Temperature/random-rectangle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/Temperature/temperature.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/Vector.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/WindRain.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/dividor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/product-sans.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/rainImage.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/wind-image.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../weather-app/src/Components/WindRain/wind-rain.css" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,40 +26,6 @@
   </component>
   <component name="CodeStyleSettingsInfer">
     <option name="done" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/Menu/Menu.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/Menu/menu.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/App.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -64,15 +39,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/Components/Menu/Menu.js" />
-        <option value="$PROJECT_DIR$/src/App.css" />
-        <option value="$PROJECT_DIR$/src/Components/Menu/menu.css" />
-      </list>
-    </option>
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="IgnoredFileRootStore">
     <option name="generatedRoots">
@@ -84,58 +51,9 @@
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1087" />
-  </component>
   <component name="ProjectId" id="1YD5LjDn75hVcc7BMHZBS5NA6li" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
-  </component>
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="SOLAN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SOLAN" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SOLAN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SOLAN" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SOLAN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SOLAN" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SOLAN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SOLAN" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Components" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="SOLAN" type="b2602c69:ProjectViewProjectNode" />
-              <item name="SOLAN" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Components" type="462c0819:PsiDirectoryNode" />
-              <item name="Menu" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
-    </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
@@ -208,44 +126,11 @@
       <workItem from="1582464271454" duration="22998000" />
       <workItem from="1582542951728" duration="20881000" />
       <workItem from="1583162540617" duration="5160000" />
+      <workItem from="1585774128780" duration="9086000" />
+      <workItem from="1585789486069" duration="194000" />
+      <workItem from="1585822269947" duration="2407000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5160000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="953" y="0" width="974" height="1087" extended-state="0" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.15098469" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" />
-      <window_info anchor="bottom" id="Version Control" />
-      <window_info anchor="bottom" id="Terminal" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Database" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -256,12 +141,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -282,34 +161,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Menu/menu.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="55" column="30" lean-forward="true" selection-start-line="55" selection-start-column="30" selection-end-line="55" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/Menu/Menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="34" lean-forward="true" selection-start-line="7" selection-start-column="34" selection-end-line="7" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

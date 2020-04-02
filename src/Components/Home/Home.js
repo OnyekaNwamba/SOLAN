@@ -10,7 +10,7 @@ import { format } from "date-fns";
 const Home = () => {
   const { dispatch } = useStore();
   const [data, setData] = useState({
-    city: "Loading..",
+    city: "Loading...",
     windSpeed: 0,
     humidity: 0,
     temp: " ",
@@ -68,7 +68,7 @@ const Home = () => {
     <>
       <CityTitle date={data.date} time={data.time} city={data.city} />
       <Temperature temp={`${data.temp}°C`} />
-      <WindRain speed={`${data.windSpeed} m/s`} humidity={`${data.humidity}%`}/>
+      <WindRain speed={`${data.windSpeed} m/s`} humidity={`${data.humidity}%`} />
       <Weather weather={data.weather} />
     </>
   );

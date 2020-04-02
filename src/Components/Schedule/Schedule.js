@@ -213,7 +213,7 @@ const getActivityInformation = async (code, lat, long, hour) => {
     json = await resp.json();
     CACHE[url] = json;
 
-    while (json.results.length === 0) {
+    while (json.results.length === 0) { // retry if we get nothing
       choice = genRandomNumber(ACTIVITY_CHOICES[hour][type].length);
       url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITY_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
 
@@ -237,7 +237,8 @@ const getActivityInformation = async (code, lat, long, hour) => {
       long: place.geometry.location.lng
     },
     placeId: place.place_id,
-    rating: place.rating
+    rating: place.rating,
+    photos: place.photos
   };
 };
 
@@ -269,7 +270,9 @@ const getSchedule = async (weather, lat, long) => {
     img: weather.weather[0].main,
     weather: weather.weather[0].main,
     temp: weather.main.temp,
-    marker: activityInformation.marker
+    marker: activityInformation.marker,
+    rating: activityInformation.rating,
+    photos: activityInformation.photos,
   };
 };
 
@@ -294,6 +297,7 @@ const Schedule = () => {
           let s = await getSchedule(forecast, state.lat, state.long);
           data.push(s);
         }
+
         setSchedule(data);
       }
     };
@@ -315,7 +319,7 @@ const Schedule = () => {
       };
     };
 
-    if (state.lat && state.long) {
+    if (state.lat && state.long && state.city && state.country) {
       fetchData(state.city, state.country);
     } else {
       fetchCoordinates(pos => {
@@ -358,12 +362,14 @@ const Schedule = () => {
               weather={s.weather}
               marker={s.marker}
               placeId={s.placeId}
+              rating={s.rating}
+              photos={s.photos}
             />
           );
         })
       ) : (
-        <p>Loading</p>
-      )}
+          <p className="cityText">Loading...</p>
+        )}
     </>
   );
 };
