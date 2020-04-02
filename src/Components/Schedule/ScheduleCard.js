@@ -75,7 +75,7 @@ const ScheduleCard = ({
         });
       }
     });
-  }, []);
+  }, [marker.lat, marker.long, placeId]);
 
   return (
     <Card className="ma-3">
@@ -100,7 +100,7 @@ const ScheduleCard = ({
 
         <div className="py-3">
           {photos.length > 0 ? photos.map((photo) => {
-            return <img src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}`} />
+            return <img src={`"https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}&maxheight=400`} />
           }) : null}
         </div>
       </div> : null}

@@ -50,11 +50,11 @@ const App = () => {
   const { state } = useStore();
   const location = useLocation();
 
-  function chooseBg(){
-    if(location.pathname =="/"){
+  function chooseBg() {
+    if (location.pathname === "/") {
       return BACKGROUNDS[state.weather];
     }
-    else{
+    else {
       return OTHER_BACKGROUNDS[state.weather];
     }
   }
@@ -75,12 +75,12 @@ const App = () => {
   }, [window.google]);
 
   return (
-    <div className={"container"} style={{backgroundImage: chooseBg()}}>
+    <div className={"container"} style={{ backgroundImage: chooseBg() }}>
       <Menu />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/schedule" element={<Schedule />} />
-        <Route path="/next" element={<Forecast />} />        
+        <Route path="/next" element={<Forecast />} />
       </Routes>
     </div>
 

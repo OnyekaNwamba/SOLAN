@@ -8,7 +8,7 @@ const defaultState = {
   weather: "Clear"
 };
 
-const StoreContext = createContext(null);
+export const StoreContext = createContext(null);
 
 const reducer = (state = defaultState, action = {}) => {
   switch (action.type) {

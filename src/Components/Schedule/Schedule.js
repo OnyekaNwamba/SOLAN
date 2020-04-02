@@ -1,6 +1,7 @@
 import "./Schedule.css";
 import { differenceInHours, format, getHours } from "date-fns";
 import React, { useEffect, useState } from "react";
+import { useAsyncEffect } from "use-async-effect"
 
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
@@ -213,7 +214,7 @@ const getActivityInformation = async (code, lat, long, hour) => {
     json = await resp.json();
     CACHE[url] = json;
 
-    while (json.results.length === 0) { // retry if we get nothing
+    while (json.results.length === 0) {
       choice = genRandomNumber(ACTIVITY_CHOICES[hour][type].length);
       url = `maps/api/place/nearbysearch/json?key=${GOOGLE_API_KEY}&name=${ACTIVITY_CHOICES[hour][type][choice]}&location=${lat},${long}&radius=10000&fields=photos,formatted_address,name,rating,opening_hours,geometry,place_id,opening_hours`;
 
@@ -230,6 +231,8 @@ const getActivityInformation = async (code, lat, long, hour) => {
     1
   )[0];
 
+  console.log(place)
+
   return {
     location: place.name,
     marker: {
@@ -238,7 +241,7 @@ const getActivityInformation = async (code, lat, long, hour) => {
     },
     placeId: place.place_id,
     rating: place.rating,
-    photos: place.photos
+    photos: place.photos || []
   };
 };
 
@@ -271,7 +274,6 @@ const getSchedule = async (weather, lat, long) => {
     weather: weather.weather[0].main,
     temp: weather.main.temp,
     marker: activityInformation.marker,
-    rating: activityInformation.rating,
     photos: activityInformation.photos,
   };
 };
@@ -281,8 +283,13 @@ const Schedule = () => {
 
   const [schedule, setSchedule] = useState([]);
 
+  const [coords, setCoords] = useState({
+    lat: null,
+    long: null
+  })
+
   useEffect(() => {
-    const fetchData = async (city, country) => {
+    const fetchData = async (city, country, lat, long) => {
       const response = await fetch(
         `http://api.openweathermap.org/data/2.5/forecast/?q=${city},${country}&appid=${API_KEY}&units=metric`
       );
@@ -294,10 +301,9 @@ const Schedule = () => {
         const data = [];
 
         for (const forecast of json.list.slice(0, 9)) {
-          let s = await getSchedule(forecast, state.lat, state.long);
+          let s = await getSchedule(forecast, lat, long);
           data.push(s);
         }
-
         setSchedule(data);
       }
     };
@@ -315,15 +321,23 @@ const Schedule = () => {
 
       return {
         country: weatherData.sys.country,
-        city: weatherData.name
+        city: weatherData.name,
+        lat,
+        long,
       };
     };
 
-    if (state.lat && state.long && state.city && state.country) {
-      fetchData(state.city, state.country);
+    if (state.city && state.country && state.lat && state.long) {
+      fetchData(state.city, state.country, state.lat, state.long);
     } else {
+
       fetchCoordinates(pos => {
         const { latitude, longitude } = pos.coords;
+
+        setCoords({
+          lat: latitude,
+          long: longitude
+        })
 
         dispatch({
           type: "SET_COORDS",
@@ -333,20 +347,12 @@ const Schedule = () => {
           }
         });
 
-        fetchLocationData(latitude, longitude).then(({ country, city }) => {
-          console.log(country, city);
-          fetchData(city, country);
+        fetchLocationData(latitude, longitude).then(({ country, city, lat, long }) => {
+          fetchData(city, country, lat, long);
         });
       });
     }
-  }, [
-    state.lat,
-    state.long,
-    state.weather,
-    dispatch,
-    state.city,
-    state.country
-  ]);
+  }, [dispatch, state.city, state.country, state.lat, state.long]);
 
   return (
     <>
@@ -362,13 +368,12 @@ const Schedule = () => {
               weather={s.weather}
               marker={s.marker}
               placeId={s.placeId}
-              rating={s.rating}
               photos={s.photos}
             />
           );
         })
       ) : (
-          <p className="cityText">Loading...</p>
+          <p>Loading</p>
         )}
     </>
   );
