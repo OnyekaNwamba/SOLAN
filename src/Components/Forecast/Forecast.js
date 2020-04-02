@@ -1,7 +1,8 @@
 import "./Forecast.css";
 import React, { useEffect, useState } from "react";
 import { useStore } from "../../stores/root";
-import { API_KEY, fetchCoordinates } from "../../utils";
+import {  API_KEY, fetchWeatherData, fetchCoordinates } from "../../utils";
+
 
 /* Weather icons */
 import SunnyImage from "../../assets/sunny.svg";
@@ -13,7 +14,7 @@ import RainImage from "../../assets/rain.svg";
 
 /* Misc icons */
 import divisorImage from "./dividor.png";
-import rainImage from "./Vector.png";
+import rainImage from "./rainImage.svg";
 import windImage from "./wind-image.svg";
 
 const DAYS = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -43,6 +44,7 @@ function getTotal(map, day, current) {
     else
         return current;
 }
+
 
 function getHigh(map, day, current) {
     if (map.has(day)) {
@@ -154,7 +156,7 @@ function getNextDayForecast(json) {
         let parse_temp = Math.floor(avgTemp.get(keys[j]));
         let parse_wind = Math.round((avgWind.get(keys[j]) / 8));
         let parse_humid = Math.floor(avgHumid.get(keys[j]) / 8);
-
+      
         data.push({
             day: keys[j],
             temp: parse_temp,
@@ -169,7 +171,6 @@ function getNextDayForecast(json) {
 
 const Forecast = () => {
     const { state, dispatch } = useStore();
-
     const [forecast, setForecast] = useState([]);
 
 
@@ -205,7 +206,6 @@ const Forecast = () => {
 
 
     }, [dispatch, state.weather]);
-
     return (
         <>
             {forecast.length > 0 ? (
