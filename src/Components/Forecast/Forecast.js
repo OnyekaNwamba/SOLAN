@@ -170,12 +170,12 @@ function getNextDayForecast(json) {
 
 
 const Forecast = () => {
-    const { state, dispatch } = useStore();
+    const { state } = useStore();
     const [forecast, setForecast] = useState([]);
 
-
+    
     useEffect(() => {
-        const fetchData = async (lat, long) => {
+        const fetchData = async (lat,long) => {
             const response = await fetch(
                 `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${long}&appid=${API_KEY}&units=metric`
             );
@@ -183,25 +183,18 @@ const Forecast = () => {
             const json = await response.json();
             console.log(json);
 
-
-            setForecast(getNextDayForecast(json));
+            let weatherData=[];
+            weatherData = getNextDayForecast(json);
+            setForecast(weatherData);
         };
 
-        if (navigator && navigator.geolocation) {
-            fetchCoordinates(pos => {
-                const { latitude, longitude } = pos.coords;
-
-                dispatch({
-                    type: 'SET_COORDS',
-                    payload: {
-                        lat: latitude,
-                        long: longitude
-                    }
-                })
-
-
-                fetchData(latitude, longitude);
-            });
+        if(navigator.geolocation)
+            navigator.geolocation.getCurrentPosition(success);
+        else
+            console.log("Geolocation not supported");
+        
+        function success(position){
+	    fetchData(position.coords.latitude, position.coords.longitude);
         }
 
 
