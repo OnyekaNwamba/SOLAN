@@ -198,7 +198,7 @@ const Forecast = () => {
         }
 
 
-    }, [dispatch, state.weather]);
+    }, [state.weather]);
     return (
         <>
             {forecast.length > 0 ? (
