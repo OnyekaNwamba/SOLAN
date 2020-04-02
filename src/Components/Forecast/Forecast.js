@@ -44,6 +44,19 @@ function getTotal(map, day, current){
         return current;
 }
 
+function getHigh(map, day, current){
+    if (map.has(day)){
+        let temp = map.get(day);
+        let highest = current;
+	if (temp > highest){
+	    return temp
+	}
+	else{
+	    return highest
+	}	
+    }
+}
+
 /* Returns array of keys with equal maximum value */
 function getMax(object){
     return Object.keys(object).filter(x => {
@@ -119,7 +132,7 @@ function getNextDayForecast(json){
         if(!avgTemp.has(day))
             keys.push(day);
 
-        let totalTemp = getTotal(avgTemp, day, current_temp);
+        let totalTemp = getHigh(avgTemp, day, current_temp);
         avgTemp.set(day, totalTemp);
 
         let totalHumid = getTotal(avgHumid, day, current_humid);
@@ -138,7 +151,7 @@ function getNextDayForecast(json){
         chosen_weather = chooseWeather(max);
 
     for(let j = 0; j<keys.length;j++){
-        let parse_temp = Math.floor(avgTemp.get(keys[j])/8);
+        let parse_temp = Math.floor(avgTemp.get(keys[j]));
         let parse_wind = Math.round((avgWind.get(keys[j])/8));
         let parse_humid = Math.floor(avgHumid.get(keys[j])/8);
         
