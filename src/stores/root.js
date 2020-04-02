@@ -3,8 +3,8 @@ import React, { createContext, useContext, useReducer } from "react";
 const defaultState = {
   lat: null,
   long: null,
-  country: " ",
-  city: " ",
+  country: null,
+  city: null,
   weather: "Clear"
 };
 

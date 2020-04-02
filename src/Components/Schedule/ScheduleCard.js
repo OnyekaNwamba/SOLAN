@@ -7,6 +7,7 @@ import SnowImage from "../../assets/snow.svg"
 import RainImage from "../../assets/rain.svg"
 import "./Schedule.css";
 import Card from "../Card/Card";
+import { GOOGLE_API_KEY } from "../../utils";
 
 const ICONS = {
   Clouds: `${CloudImage}`,
@@ -24,7 +25,9 @@ const ScheduleCard = ({
   icon,
   temp,
   weather,
-  marker
+  marker,
+  photos,
+  rating
 }) => {
   const [expanded, setExpanded] = useState(false);
 
@@ -91,8 +94,16 @@ const ScheduleCard = ({
         </div>
       </div>
 
-      {expanded ? <div className="more-info"></div> : null}
+      {expanded ? <div className="more-info">
 
+        <p>Rating:{rating}</p>
+
+        <div className="py-3">
+          {photos.length > 0 ? photos.map((photo) => {
+            return <img src={`https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}`} />
+          }) : null}
+        </div>
+      </div> : null}
       <i className="material-icons" onClick={handleExpanded}>
         {expanded ? "expand_less" : "expand_more"}
       </i>
