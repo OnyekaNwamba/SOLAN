@@ -1,7 +1,6 @@
 import "./Schedule.css";
 import { differenceInHours, format, getHours } from "date-fns";
 import React, { useEffect, useState } from "react";
-import { useAsyncEffect } from "use-async-effect"
 
 import ScheduleCard from "./ScheduleCard";
 import { useStore } from "../../stores/root";
@@ -231,7 +230,6 @@ const getActivityInformation = async (code, lat, long, hour) => {
     1
   )[0];
 
-  console.log(place)
 
   return {
     location: place.name,
@@ -275,6 +273,7 @@ const getSchedule = async (weather, lat, long) => {
     temp: weather.main.temp,
     marker: activityInformation.marker,
     photos: activityInformation.photos,
+    rating: activityInformation.rating
   };
 };
 
@@ -283,10 +282,7 @@ const Schedule = () => {
 
   const [schedule, setSchedule] = useState([]);
 
-  const [coords, setCoords] = useState({
-    lat: null,
-    long: null
-  })
+
 
   useEffect(() => {
     const fetchData = async (city, country, lat, long) => {
@@ -295,7 +291,6 @@ const Schedule = () => {
       );
       const json = await response.json();
 
-      console.log(json);
 
       if (json.cod === "200" && json.list) {
         const data = [];
@@ -334,11 +329,6 @@ const Schedule = () => {
       fetchCoordinates(pos => {
         const { latitude, longitude } = pos.coords;
 
-        setCoords({
-          lat: latitude,
-          long: longitude
-        })
-
         dispatch({
           type: "SET_COORDS",
           payload: {
@@ -366,6 +356,7 @@ const Schedule = () => {
               icon={s.img}
               temp={s.temp}
               weather={s.weather}
+              rating={s.rating}
               marker={s.marker}
               placeId={s.placeId}
               photos={s.photos}

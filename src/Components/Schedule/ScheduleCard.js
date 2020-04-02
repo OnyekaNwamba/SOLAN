@@ -96,11 +96,12 @@ const ScheduleCard = ({
 
       {expanded ? <div className="more-info">
 
-        <p>Rating:{rating}</p>
+        <p className="rating" style={{ textAlign: "left" }}>Rating:{rating}</p>
 
         <div className="py-3">
           {photos.length > 0 ? photos.map((photo) => {
-            return <img src={`"https://maps.googleapis.com/maps/api/place/photo?photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}&maxheight=400`} />
+
+            return <img style={{ maxHeight: "128px", maxWidth: "256px" }} src={`maps/api/place/photo?photoreference=${photo.photo_reference}&key=${GOOGLE_API_KEY}&maxheight=400`} />
           }) : null}
         </div>
       </div> : null}

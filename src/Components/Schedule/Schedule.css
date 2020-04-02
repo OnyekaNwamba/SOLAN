@@ -38,3 +38,12 @@ margin: 0 auto;
 height: 96px;
 width: 96px;
 }
+
+.rating {
+  font-family: Product Sans;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.7);  
+}
